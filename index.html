@@ -15,7 +15,7 @@
 
         body, html {
             height: 100vh;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             background: #0a0a0a;
             color: var(--white);
             overflow: hidden;
@@ -60,7 +60,6 @@
             text-align: center;
         }
 
-        /* --- TIÊU ĐỀ CHÍNH (Đã fix mất chữ) --- */
         #main-title { 
             font-size: clamp(2.5rem, 8vw, 5.5rem); 
             font-weight: 900; 
@@ -68,8 +67,6 @@
             margin-bottom: 10px;
             text-shadow: 0 10px 30px rgba(0,0,0,0.8);
             transition: var(--transition);
-            opacity: 1 !important; /* Đảm bảo luôn hiện */
-            transform: translateY(0) !important;
         }
 
         #main-title:hover {
@@ -157,7 +154,6 @@
     </main>
 
     <script>
-        // Hiệu ứng tuyết rơi
         const field = document.getElementById('snow-field');
         for (let i = 0; i < 60; i++) {
             const snow = document.createElement('div');
@@ -171,7 +167,6 @@
             field.appendChild(snow);
         }
 
-        // Follower chuột
         const flw = document.getElementById('follower');
         document.addEventListener('mousemove', (e) => {
             flw.style.transform = `translate(${e.clientX - 6}px, ${e.clientY - 6}px)`;
