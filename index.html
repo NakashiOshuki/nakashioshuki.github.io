@@ -72,6 +72,7 @@
             margin-bottom: 25px;
         }
 
+        /* Đã cập nhật link logo Mioris tại đây */
         .main-avatar-box img {
             width: 150px;
             border-radius: 30px;
@@ -190,7 +191,7 @@
 
     <main class="hero-section">
         <div class="main-avatar-box">
-            <img src="img/2059e956374eb0ce2173f49214eb53bc.png" alt="MiorisNakashi">
+            <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/2059e956374eb0ce2173f49214eb53bc.png" alt="MiorisNakashi">
             <span class="main-tag">@miorisnakashi</span>
         </div>
         <h1 id="main-title">Archive Client</h1>
@@ -201,41 +202,35 @@
     <section class="contributors-section">
         <h2 style="font-size: 2.5rem;">❤️ CONTRIBUTORS</h2>
         <div class="contrib-grid">
-            
             <div class="contrib-card">
                 <div class="img-wrapper">
-                    <img src="img/5592f317c7eb53c8b45066aacf5f88fc.png">
+                    <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/5592f317c7eb53c8b45066aacf5f88fc.png">
                     <span class="hover-name" style="background: var(--tag-blue);">@thesmartcat2303</span>
                 </div>
                 <p style="font-weight: 800;">KAWAII LOLI</p>
             </div>
-
             <div class="contrib-card">
                 <div class="img-wrapper">
-                    <img src="img/ae56fd8615daaae078ad3f86608aa5a3.png">
+                    <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/ae56fd8615daaae078ad3f86608aa5a3.png">
                     <span class="hover-name" style="background: var(--tag-red);">@xaibone</span>
                 </div>
                 <p style="font-weight: 800;">LUVSY</p>
             </div>
-
             <div class="contrib-card">
                 <div class="img-wrapper">
-                    <img src="img/2bc628b7dca7ab619c2b210b7dee692a.png">
+                    <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/2bc628b7dca7ab619c2b210b7dee692a.png">
                     <span class="hover-name" style="background: var(--tag-purple);">@zero__mc</span>
                 </div>
                 <p style="font-weight: 800;">STING</p>
             </div>
-
             <div class="contrib-card">
                 <div class="img-wrapper">
-                    <img src="img/84dadce511ea23b434e11af3e9c362da.png">
+                    <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/84dadce511ea23b434e11af3e9c362da.png">
                     <span class="hover-name" style="background: var(--tag-orange);">@toidicakhia</span>
                 </div>
                 <p style="font-weight: 800;">CYDE</p>
             </div>
-
         </div>
-        <p style="margin-top: 100px; opacity: 0.3; font-size: 0.8rem;">Copyright © 2026 ArchiveUI</p>
     </section>
 
     <script>
@@ -251,12 +246,10 @@
             snow.style.animationDelay = Math.random() * 5 + 's';
             field.appendChild(snow);
         }
-
         const crsr = document.getElementById('cursor');
         document.addEventListener('mousemove', (e) => {
             crsr.style.transform = `translate(${e.clientX - 6}px, ${e.clientY - 6}px)`;
         });
-
         window.addEventListener('scroll', () => {
             const scroll = window.scrollY;
             document.getElementById('bg').style.opacity = scroll > 400 ? '0.1' : '1';
