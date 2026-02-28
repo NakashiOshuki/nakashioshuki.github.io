@@ -33,7 +33,6 @@
                         url('https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/Nekoha-Shizuku.png') no-repeat center center;
             background-size: cover;
             z-index: 1;
-            transition: opacity 0.6s ease;
         }
 
         .snow-container {
@@ -67,6 +66,58 @@
             text-align: center;
         }
 
+        /* TIÊU ĐỀ CHÍNH VỚI HIỆU ỨNG GLITCH HIỆN ĐẠI */
+        #main-title { 
+            font-size: clamp(3rem, 10vw, 6rem); 
+            font-weight: 900; 
+            text-transform: uppercase;
+            letter-spacing: 12px;
+            color: #fff;
+            position: relative;
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+            transition: all 0.3s;
+        }
+
+        #main-title:hover {
+            transform: scale(1.05);
+            color: var(--main-pink);
+            text-shadow: 
+                3px 3px 0px #ff00ea, 
+                -3px -3px 0px #00eaff,
+                0 0 30px var(--main-pink);
+            letter-spacing: 15px;
+        }
+
+        #main-title::before, #main-title::after {
+            content: "Archive Client";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0;
+        }
+
+        #main-title:hover::before {
+            opacity: 0.7;
+            color: #ff00ea;
+            z-index: -1;
+            animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+        }
+
+        #main-title:hover::after {
+            opacity: 0.7;
+            color: #00eaff;
+            z-index: -2;
+            animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) reverse both infinite;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-3px, 3px); }
+            40% { transform: translate(-3px, -3px); }
+            60% { transform: translate(3px, 3px); }
+            80% { transform: translate(3px, -3px); }
+            100% { transform: translate(0); }
+        }
+
         .main-avatar-box {
             position: relative;
             margin-bottom: 25px;
@@ -80,7 +131,7 @@
         }
 
         .main-avatar-box:hover img { 
-            transform: scale(1.1); 
+            transform: scale(1.1) rotate(5deg); 
             box-shadow: 0 0 30px var(--main-pink);
         }
 
@@ -97,59 +148,36 @@
             transition: var(--transition);
             white-space: nowrap;
             color: var(--main-pink);
-            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .main-avatar-box:hover .main-tag { opacity: 1; bottom: -15px; }
 
-        #main-title { 
-            font-size: clamp(3rem, 10vw, 6rem); 
-            font-weight: 900; 
-            text-transform: uppercase;
-            letter-spacing: 8px;
-            background: linear-gradient(to right, #fff, var(--main-pink), #ff7eb3, #fff);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 10px rgba(255, 183, 197, 0.5));
-            animation: gradientMove 3s linear infinite;
-            display: inline-block;
-        }
-
-        #main-title:hover {
-            animation: gradientMove 3s linear infinite, shake 0.3s infinite;
-        }
-
-        @keyframes gradientMove { to { background-position: 200% center; } }
-
-        @keyframes shake {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(2px, -2px) rotate(1deg); }
-            50% { transform: translate(-2px, 2px) rotate(-1deg); }
-            75% { transform: translate(2px, 2px) rotate(1deg); }
-            100% { transform: translate(-2px, -2px) rotate(-1deg); }
-        }
-
         #cta-btn {
             margin-top: 40px;
             display: inline-block;
-            padding: 20px 70px;
+            padding: 18px 60px;
             color: var(--white);
             text-decoration: none;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
+            border-radius: 50px;
             font-weight: 800;
             transition: var(--transition);
             backdrop-filter: blur(10px);
+            letter-spacing: 2px;
         }
 
-        #cta-btn:hover { background: var(--main-pink); color: #000; transform: translateY(-5px); }
+        #cta-btn:hover { 
+            background: #fff; 
+            color: #000; 
+            transform: scale(1.1);
+            box-shadow: 0 0 30px #fff;
+        }
 
         .contributors-section {
             position: relative;
             z-index: 100;
-            background: var(--dark-blue);
+            background: #050505;
             padding: 120px 20px;
             text-align: center;
         }
@@ -181,31 +209,29 @@
             transition: var(--transition);
         }
 
-        .img-wrapper:hover img { transform: translateY(-10px); border-color: var(--white); }
+        .img-wrapper:hover img { transform: translateY(-15px) scale(1.05); }
 
-        .contrib-card:nth-child(1) .img-wrapper:hover img { box-shadow: 0 0 25px var(--tag-blue); }
-        .contrib-card:nth-child(2) .img-wrapper:hover img { box-shadow: 0 0 25px var(--tag-red); }
-        .contrib-card:nth-child(3) .img-wrapper:hover img { box-shadow: 0 0 25px var(--tag-purple); }
-        .contrib-card:nth-child(4) .img-wrapper:hover img { box-shadow: 0 0 25px var(--tag-orange); }
+        .contrib-card:nth-child(1) .img-wrapper:hover img { box-shadow: 0 0 30px var(--tag-blue); }
+        .contrib-card:nth-child(2) .img-wrapper:hover img { box-shadow: 0 0 30px var(--tag-red); }
+        .contrib-card:nth-child(3) .img-wrapper:hover img { box-shadow: 0 0 30px var(--tag-purple); }
+        .contrib-card:nth-child(4) .img-wrapper:hover img { box-shadow: 0 0 30px var(--tag-orange); }
 
         .hover-name {
             position: absolute;
-            top: -30px;
+            top: -20px;
             left: 50%;
             transform: translateX(-50%);
             padding: 5px 12px;
             border-radius: 8px;
             font-size: 0.75rem;
             opacity: 0;
-            transition: var(--transition);
+            transition: 0.3s;
             white-space: nowrap;
-            pointer-events: none;
-            z-index: 10;
         }
 
-        .img-wrapper:hover .hover-name { opacity: 1; top: -45px; }
+        .img-wrapper:hover .hover-name { opacity: 1; top: -50px; }
 
-        .contrib-card p { font-weight: 800; letter-spacing: 1px; font-size: 0.9rem; }
+        .contrib-card p { font-weight: 800; letter-spacing: 1px; font-size: 0.9rem; margin-top: 10px; }
 
         .cursor {
             position: fixed;
@@ -231,12 +257,12 @@
             <span class="main-tag">@miorisnakashi</span>
         </div>
         <h1 id="main-title">Archive Client</h1>
-        <p style="opacity: 0.7; letter-spacing: 2px;">Archive Client Minecraft Hacking</p>
-        <a href="download.html" id="cta-btn">GET STARTED</a>
+        <p style="opacity: 0.6; letter-spacing: 4px; font-weight: 300;">NEXT GENERATION EXPLOIT</p>
+        <a href="download.html" id="cta-btn">DOWNLOAD NOW</a>
     </main>
 
     <section class="contributors-section">
-        <h2 style="font-size: 2.5rem;">❤️ CONTRIBUTORS</h2>
+        <h2 style="font-size: 2.5rem; letter-spacing: 5px; margin-bottom: 20px;">TEAM MEMBERS</h2>
         <div class="contrib-grid">
             <div class="contrib-card">
                 <div class="img-wrapper">
@@ -285,10 +311,6 @@
         const crsr = document.getElementById('cursor');
         document.addEventListener('mousemove', (e) => {
             crsr.style.transform = `translate(${e.clientX - 6}px, ${e.clientY - 6}px)`;
-        });
-        window.addEventListener('scroll', () => {
-            const scroll = window.scrollY;
-            document.getElementById('bg').style.opacity = scroll > 400 ? '0.1' : '1';
         });
     </script>
 </body>
