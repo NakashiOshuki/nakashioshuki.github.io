@@ -96,19 +96,30 @@
             opacity: 0;
             transition: var(--transition);
             white-space: nowrap;
-            pointer-events: none;
             color: var(--main-pink);
             border: 1px solid rgba(255,255,255,0.1);
         }
 
         .main-avatar-box:hover .main-tag { opacity: 1; bottom: -15px; }
 
+        /* HIỆU ỨNG CHỮ ĐẦU TRANG (ARCHIVE CLIENT) */
         #main-title { 
             font-size: clamp(3rem, 10vw, 6rem); 
             font-weight: 900; 
             text-transform: uppercase;
-            letter-spacing: 5px;
-            text-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            letter-spacing: 8px;
+            /* Tạo dải màu gradient */
+            background: linear-gradient(to right, #fff, var(--main-pink), #ff7eb3, #fff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            /* Hiệu ứng phát sáng cho chữ */
+            filter: drop-shadow(0 0 10px rgba(255, 183, 197, 0.5));
+            animation: gradientMove 3s linear infinite;
+        }
+
+        @keyframes gradientMove {
+            to { background-position: 200% center; }
         }
 
         #cta-btn {
@@ -164,6 +175,7 @@
 
         .img-wrapper:hover img { transform: translateY(-10px); border-color: var(--white); }
 
+        /* Glow effects cho contributors */
         .contrib-card:nth-child(1) .img-wrapper:hover img { box-shadow: 0 0 25px var(--tag-blue); }
         .contrib-card:nth-child(2) .img-wrapper:hover img { box-shadow: 0 0 25px var(--tag-red); }
         .contrib-card:nth-child(3) .img-wrapper:hover img { box-shadow: 0 0 25px var(--tag-purple); }
@@ -208,7 +220,7 @@
 
     <main class="hero-section">
         <div class="main-avatar-box">
-            <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/2059e956374eb0ce2173f49214eb53bc.png">
+            <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/2059e956374eb0ce2173f49214eb53bc.png" alt="MiorisNakashi">
             <span class="main-tag">@miorisnakashi</span>
         </div>
         <h1 id="main-title">Archive Client</h1>
@@ -219,7 +231,6 @@
     <section class="contributors-section">
         <h2 style="font-size: 2.5rem;">❤️ CONTRIBUTORS</h2>
         <div class="contrib-grid">
-            
             <div class="contrib-card">
                 <div class="img-wrapper">
                     <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/5592f317c7eb53c8b45066aacf5f88fc.png">
@@ -227,7 +238,6 @@
                 </div>
                 <p>THE SMART CAT</p>
             </div>
-
             <div class="contrib-card">
                 <div class="img-wrapper">
                     <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/ae56fd8615daaae078ad3f86608aa5a3.png">
@@ -235,7 +245,6 @@
                 </div>
                 <p>XAIBO</p>
             </div>
-
             <div class="contrib-card">
                 <div class="img-wrapper">
                     <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/2bc628b7dca7ab619c2b210b7dee692a.png">
@@ -243,7 +252,6 @@
                 </div>
                 <p>THE SMART BUNNY</p>
             </div>
-
             <div class="contrib-card">
                 <div class="img-wrapper">
                     <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/84dadce511ea23b434e11af3e9c362da.png">
@@ -251,9 +259,7 @@
                 </div>
                 <p>TOIDICAKHIA</p>
             </div>
-
         </div>
-        <p style="margin-top: 100px; opacity: 0.3; font-size: 0.8rem;">Copyright © 2026 ArchiveUI</p>
     </section>
 
     <script>
@@ -269,12 +275,10 @@
             snow.style.animationDelay = Math.random() * 5 + 's';
             field.appendChild(snow);
         }
-
         const crsr = document.getElementById('cursor');
         document.addEventListener('mousemove', (e) => {
             crsr.style.transform = `translate(${e.clientX - 6}px, ${e.clientY - 6}px)`;
         });
-
         window.addEventListener('scroll', () => {
             const scroll = window.scrollY;
             document.getElementById('bg').style.opacity = scroll > 400 ? '0.1' : '1';
