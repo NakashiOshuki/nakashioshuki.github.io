@@ -3,22 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Download | Augustus Client</title>
+<title>Augustus | Selection</title>
 
 <style>
 :root{
     --main:#ffb7c5;
-    --glass:rgba(255,255,255,0.08);
-    --blur:blur(18px);
+    --glass:rgba(255,255,255,.08);
     --transition:all .4s cubic-bezier(.2,.8,.2,1);
 }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    cursor:none;
-}
+*{margin:0;padding:0;box-sizing:border-box;cursor:none;}
 
 body{
     font-family:'Segoe UI',sans-serif;
@@ -27,147 +21,89 @@ body{
     overflow:hidden;
 }
 
-/* Animated Gradient Background */
-.background{
+/* Background */
+.bg{
     position:fixed;
     inset:0;
     background:
     radial-gradient(circle at 20% 30%, rgba(255,183,197,.2), transparent 40%),
     radial-gradient(circle at 80% 70%, rgba(255,0,150,.15), transparent 40%),
     url('https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/Nekoha-Shizuku.png') center/cover no-repeat;
-    z-index:1;
     animation:floatBG 15s ease-in-out infinite alternate;
+    z-index:1;
 }
 
 @keyframes floatBG{
-    from{transform:scale(1) translateY(0px);}
-    to{transform:scale(1.05) translateY(-10px);}
+    from{transform:scale(1);}
+    to{transform:scale(1.05);}
 }
 
-/* Sidebar */
-.sidebar{
-    position:fixed;
-    left:60px;
-    top:50%;
-    transform:translateY(-50%);
-    display:flex;
-    flex-direction:column;
-    gap:25px;
-    z-index:10;
-}
-
-.version-card{
-    width:140px;
-    height:85px;
-    background:var(--glass);
-    backdrop-filter:var(--blur);
-    border:1px solid rgba(255,255,255,.15);
-    border-radius:15px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:800;
-    transition:var(--transition);
-    box-shadow:0 10px 25px rgba(0,0,0,.4);
-}
-
-.version-card:hover{
-    transform:translateX(15px) scale(1.08);
-    box-shadow:0 0 25px var(--main);
-}
-
-input[type="radio"]{display:none;}
-
-#v1:checked ~ .sidebar label[for="v1"] .version-card,
-#v2:checked ~ .sidebar label[for="v2"] .version-card,
-#v3:checked ~ .sidebar label[for="v3"] .version-card{
-    background:var(--main);
-    color:#000;
-    transform:translateX(15px) scale(1.1);
-    box-shadow:0 0 35px var(--main);
-}
-
-/* Content */
-.content{
-    position:fixed;
-    left:300px;
-    right:80px;
-    top:0;
-    height:100vh;
-    display:none;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    z-index:5;
-    animation:fadeIn .6s ease;
-}
-
-@keyframes fadeIn{
-    from{opacity:0; transform:translateX(40px);}
-    to{opacity:1; transform:translateX(0);}
-}
-
-#v1:checked ~ #c1,
-#v2:checked ~ #c2,
-#v3:checked ~ #c3{
-    display:flex;
-}
-
-.logo{
-    width:160px;
-    border-radius:25px;
-    margin-bottom:25px;
-    box-shadow:0 20px 60px rgba(0,0,0,.5);
-    transition:var(--transition);
-}
-
-.logo:hover{
-    transform:scale(1.08) rotate(-3deg);
-}
-
-.title{
-    font-size:3.2rem;
-    font-weight:900;
-    margin-bottom:40px;
-    background:linear-gradient(45deg,#fff,var(--main));
-    -webkit-background-clip:text;
-    color:transparent;
-}
-
-/* Download Button */
-.dl{
-    padding:18px 55px;
-    border-radius:14px;
-    font-weight:800;
-    letter-spacing:1px;
-    text-decoration:none;
-    color:#fff;
-    background:linear-gradient(45deg,#ff7eb3,#ff758c);
+/* Grid */
+.grid{
     position:relative;
-    overflow:hidden;
+    z-index:5;
+    height:100vh;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:30px;
+    padding:80px;
+}
+
+.card{
+    background:var(--glass);
+    backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1.3rem;
+    font-weight:800;
     transition:var(--transition);
-    box-shadow:0 15px 40px rgba(255,0,100,.4);
+    cursor:pointer;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
 }
 
-.dl:hover{
-    transform:translateY(-5px);
-    box-shadow:0 25px 60px rgba(255,0,100,.6);
+.card:hover{
+    transform:scale(1.08);
+    box-shadow:0 0 30px var(--main);
 }
 
-/* Shine effect */
-.dl::after{
-    content:"";
-    position:absolute;
-    top:0;
-    left:-100%;
-    width:100%;
-    height:100%;
-    background:linear-gradient(120deg,transparent,rgba(255,255,255,.5),transparent);
-    transition:all .6s;
+/* Expanded state */
+.card.active{
+    position:fixed;
+    top:50%;
+    left:50%;
+    width:500px;
+    height:300px;
+    transform:translate(-50%,-50%) scale(1.1);
+    z-index:100;
+    font-size:2rem;
+    background:linear-gradient(135deg,#ff7eb3,#ff758c);
+    color:#000;
+    animation:expand .4s ease;
 }
 
-.dl:hover::after{
-    left:100%;
+@keyframes expand{
+    from{opacity:0;transform:translate(-50%,-50%) scale(.5);}
+    to{opacity:1;transform:translate(-50%,-50%) scale(1.1);}
+}
+
+/* Overlay */
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.6);
+    backdrop-filter:blur(5px);
+    opacity:0;
+    pointer-events:none;
+    transition:.3s;
+    z-index:50;
+}
+
+.overlay.show{
+    opacity:1;
+    pointer-events:auto;
 }
 
 /* Snow */
@@ -207,35 +143,20 @@ input[type="radio"]{display:none;}
 <body>
 
 <div class="cursor" id="cursor"></div>
-<div class="background"></div>
+<div class="bg"></div>
 <div class="snow" id="snow"></div>
+<div class="overlay" id="overlay"></div>
 
-<input type="radio" name="ver" id="v1" checked>
-<input type="radio" name="ver" id="v2">
-<input type="radio" name="ver" id="v3">
-
-<div class="sidebar">
-<label for="v1"><div class="version-card">B2.6</div></label>
-<label for="v2"><div class="version-card">B4.5</div></label>
-<label for="v3"><div class="version-card">B5.0</div></label>
-</div>
-
-<div class="content" id="c1">
-<img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/logo.png" class="logo">
-<div class="title">AUGUSTUS B2.6</div>
-<a href="#" class="dl">DOWNLOAD NOW</a>
-</div>
-
-<div class="content" id="c2">
-<img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/logo.png" class="logo">
-<div class="title">AUGUSTUS B4.5</div>
-<a href="#" class="dl">DOWNLOAD NOW</a>
-</div>
-
-<div class="content" id="c3">
-<img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/logo.png" class="logo">
-<div class="title">AUGUSTUS B5.0</div>
-<a href="#" class="dl">DOWNLOAD NOW</a>
+<div class="grid">
+<div class="card">Item 1</div>
+<div class="card">Item 2</div>
+<div class="card">Item 3</div>
+<div class="card">Item 4</div>
+<div class="card">Item 5</div>
+<div class="card">Item 6</div>
+<div class="card">Item 7</div>
+<div class="card">Item 8</div>
+<div class="card">Item 9</div>
 </div>
 
 <script>
@@ -257,6 +178,23 @@ for(let i=0;i<60;i++){
 const cursor=document.getElementById("cursor");
 document.addEventListener("mousemove",e=>{
  cursor.style.transform=`translate(${e.clientX-6}px,${e.clientY-6}px)`;
+});
+
+/* Expand logic */
+const cards=document.querySelectorAll(".card");
+const overlay=document.getElementById("overlay");
+
+cards.forEach(card=>{
+    card.addEventListener("click",()=>{
+        document.querySelectorAll(".card").forEach(c=>c.classList.remove("active"));
+        card.classList.add("active");
+        overlay.classList.add("show");
+    });
+});
+
+overlay.addEventListener("click",()=>{
+    document.querySelectorAll(".card").forEach(c=>c.classList.remove("active"));
+    overlay.classList.remove("show");
 });
 </script>
 
