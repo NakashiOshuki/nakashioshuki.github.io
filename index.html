@@ -11,7 +11,7 @@
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; } /* Hide default cursor for custom trail */
 
         body, html {
             height: 100%;
@@ -27,6 +27,20 @@
             background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('Nekoha-Shizuku.png') no-repeat center center;
             background-size: cover;
             z-index: 1;
+        }
+
+        /* Mouse Trail Element */
+        .cursor-follower {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 999;
+            transition: transform 0.1s ease-out;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
         }
 
         .mambo-gif {
@@ -94,7 +108,6 @@
             background: var(--accent-glow);
             border: 1px solid rgba(255,255,255,0.3);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
             font-weight: 600;
             letter-spacing: 2px;
             transition: var(--transition);
@@ -109,11 +122,14 @@
         @media (max-width: 768px) {
             .content-wrapper { align-items: center; padding-left: 0; text-align: center; }
             .mambo-gif { width: 140px; right: 20px; bottom: 20px; }
+            .cursor-follower { display: none; } /* Disable on mobile */
+            * { cursor: auto; }
         }
     </style>
 </head>
 <body>
 
+    <div class="cursor-follower" id="follower"></div>
     <div class="background-viewport"></div>
 
     <img src="mambo-matikanetannhauser (1).gif" class="mambo-gif" alt="">
@@ -127,6 +143,7 @@
     </main>
 
     <script>
+        // Snow Effect
         const container = document.getElementById('snow-field');
         for (let i = 0; i < 60; i++) {
             const flake = document.createElement('div');
@@ -137,6 +154,12 @@
             flake.style.animationDelay = Math.random() * 5 + 's';
             container.appendChild(flake);
         }
+
+        // Mouse Follower Effect
+        const follower = document.getElementById('follower');
+        document.addEventListener('mousemove', (e) => {
+            follower.style.transform = `translate(${e.clientX - 10}px, ${e.clientY - 10}px)`;
+        });
     </script>
 </body>
 </html>
