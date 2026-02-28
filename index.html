@@ -9,6 +9,7 @@
             --primary-white: #ffffff;
             --accent-glow: rgba(255, 255, 255, 0.15);
             --transition-curve: cubic-bezier(0.4, 0, 0.2, 1);
+            --blur-val: 15px;
         }
 
         * {
@@ -32,24 +33,36 @@
             background: url('Nekoha-Shizuku.png') no-repeat center center;
             background-size: cover;
             z-index: 1;
-            transform: scale(1.02); /* Slight scale for smoother edges */
+            transform: scale(1.02);
+        }
+
+        /* GIF Positioning (Khu vực bạn khoanh tròn) */
+        .mambo-gif {
+            position: fixed;
+            bottom: 40px; 
+            right: 60px;
+            width: 220px; /* Độ to của GIF */
+            height: auto;
+            z-index: 2;
+            pointer-events: none;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.5));
+            animation: bounceIn 2s var(--transition-curve);
         }
 
         /* Main Content Layout */
         .content-wrapper {
             position: relative;
-            z-index: 2;
+            z-index: 3;
             height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
             padding-left: 8vw;
-            background: linear-gradient(to right, rgba(0,0,0,0.4) 0%, transparent 60%);
+            background: linear-gradient(to right, rgba(0,0,0,0.5) 0%, transparent 70%);
             animation: fadeIn 1.5s var(--transition-curve);
         }
 
-        /* Typography */
         .title {
             font-size: clamp(3rem, 10vw, 5.5rem);
             font-weight: 900;
@@ -68,7 +81,6 @@
             text-transform: uppercase;
         }
 
-        /* Expert-Level Button Styling */
         .action-button {
             padding: 1.2rem 4.5rem;
             font-size: 1rem;
@@ -76,10 +88,10 @@
             color: var(--primary-white);
             text-decoration: none;
             background: var(--accent-glow);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(var(--blur-val));
+            -webkit-backdrop-filter: blur(var(--blur-val));
             border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 4px; /* Professional square-ish round corners */
+            border-radius: 4px;
             transition: all 0.4s var(--transition-curve);
             letter-spacing: 2px;
         }
@@ -96,13 +108,23 @@
             to { opacity: 1; transform: translateX(0); }
         }
 
+        @keyframes bounceIn {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
         /* Mobile Optimization */
         @media (max-width: 768px) {
             .content-wrapper {
                 align-items: center;
                 padding-left: 0;
                 text-align: center;
-                background: rgba(0,0,0,0.5);
+                background: rgba(0,0,0,0.6);
+            }
+            .mambo-gif {
+                width: 150px;
+                right: 20px;
+                bottom: 20px;
             }
         }
     </style>
@@ -110,6 +132,8 @@
 <body>
 
     <div class="background-viewport"></div>
+
+    <img src="mambo-matikanetannhauser (1).gif" class="mambo-gif" alt="Dancing Animation">
 
     <main class="content-wrapper">
         <h1 class="title">Archive Client</h1>
