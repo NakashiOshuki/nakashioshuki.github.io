@@ -13,32 +13,20 @@
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
 
         body, html {
-            min-height: 160vh;
+            min-height: 100vh;
             font-family: -apple-system, system-ui, sans-serif;
             background: #0a0a0a;
             color: var(--white);
             overflow-x: hidden;
-            overflow-y: auto;
         }
 
         .background-viewport {
             position: fixed;
             inset: 0;
             background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
-                        url('https://w0.peakpx.com/wallpaper/107/439/wallpaper-anime-neko-girl-cute-catears-lying-bed.jpg') no-repeat center center;
+                        url('https://images2.alphacoders.com/132/1325142.png') no-repeat center center;
             background-size: cover;
             z-index: 1;
-        }
-
-        .cursor-follower {
-            position: fixed;
-            width: 15px; height: 15px;
-            background: rgba(255, 255, 255, 0.4);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 999;
-            transition: transform 0.1s ease-out;
-            border: 1px solid rgba(255, 255, 255, 0.6);
         }
 
         .snow-container {
@@ -53,96 +41,100 @@
             border-radius: 50%;
             opacity: 0.8;
             filter: blur(1.5px);
-            animation: snow-fall linear infinite, snow-shake ease-in-out infinite;
+            animation: snow-fall linear infinite;
         }
 
         @keyframes snow-fall {
-            0% { top: -10%; }
-            100% { top: 110%; }
-        }
-
-        @keyframes snow-shake {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(35px); }
+            0% { transform: translateY(-10vh); }
+            100% { transform: translateY(110vh); }
         }
 
         .content-wrapper {
             position: relative;
-            z-index: 10;
-            min-height: 100vh;
+            z-index: 100;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
         }
 
-        .text-content-only {
+        /* Vùng chứa Logo */
+        .logo-box {
+            margin-bottom: 20px;
+        }
+        .logo-box img {
+            max-width: 120px; /* Chỉnh cỡ logo tại đây */
+            height: auto;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+        }
+
+        .text-center {
             text-align: center;
-            max-width: 800px;
-            width: 95%;
-            animation: pushUp 1.3s var(--transition) forwards; 
+            animation: pushUp 1.2s ease-out;
         }
 
         @keyframes pushUp {
-            0% { opacity: 0; transform: translateY(100px); }
+            0% { opacity: 0; transform: translateY(50px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
         #main-title { 
-            font-size: clamp(2.8rem, 8vw, 5.5rem); 
+            font-size: clamp(2.5rem, 8vw, 5rem); 
             font-weight: 800; 
-            text-transform: uppercase; 
-            line-height: 1; 
-            margin-bottom: 20px;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            text-transform: uppercase;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         #sub-title { 
-            font-size: 1.25rem; 
-            letter-spacing: 1.5px;
-            opacity: 0.9;
-            margin-bottom: 60px;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.6);
+            font-size: 1.1rem; 
+            opacity: 0.8;
+            margin: 10px 0 40px 0;
         }
         
         #cta-btn {
             display: inline-block;
-            padding: 20px 70px;
+            padding: 18px 60px;
             color: var(--white);
             text-decoration: none;
-            background: rgba(255, 255, 255, 0.12);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
             font-weight: 700;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             transition: var(--transition);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(10px);
             position: relative;
-            z-index: 100;
-            pointer-events: auto;
+            z-index: 101; /* Đảm bảo nút luôn trên cùng */
         }
 
         #cta-btn:hover { 
-            background: rgba(255, 255, 255, 0.25); 
-            transform: scale(1.05) translateY(-5px); 
-            border-color: var(--white); 
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            background: rgba(255, 255, 255, 0.2); 
+            transform: scale(1.05);
+            border-color: white;
         }
 
-        .footer-spacer {
-            height: 50vh;
-        }
-
+        /* Copyright nằm dưới cùng */
         .footer-copyright {
-            position: relative;
-            padding-bottom: 30px;
-            text-align: center;
-            z-index: 10;
-            font-size: 0.9rem;
-            opacity: 0.5;
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            font-size: 0.85rem;
+            opacity: 0.4;
             letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        .cursor-follower {
+            position: fixed;
+            width: 10px; height: 10px;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease-out;
         }
 
         @media (max-width: 768px) {
@@ -158,34 +150,38 @@
     <div class="snow-container" id="snow-field"></div>
 
     <main class="content-wrapper">
-        <div class="text-content-only">
+        <div class="logo-box">
+            <img src="https://via.placeholder.com/150x150?text=LOGO" alt="Logo">
+        </div>
+
+        <div class="text-center">
             <h1 id="main-title">Archive Client</h1>
             <p id="sub-title">Archive Client Minecraft Hacking</p>
             <a href="download.html" id="cta-btn">GET STARTED</a>
         </div>
-    </main>
 
-    <div class="footer-spacer"></div>
-    <footer class="footer-copyright">Copyright © 2026 ArchiveUI</footer>
+        <footer class="footer-copyright">
+            Copyright © 2026 ArchiveUI
+        </footer>
+    </main>
 
     <script>
         const field = document.getElementById('snow-field');
-        for (let i = 0; i < 100; i++) {
+        for (let i = 0; i < 60; i++) {
             const snow = document.createElement('div');
             snow.className = 'snowflake';
-            const size = Math.random() * 5 + 2;
+            const size = Math.random() * 4 + 2;
             snow.style.width = size + 'px';
             snow.style.height = size + 'px';
             snow.style.left = Math.random() * 100 + '%';
-            snow.style.opacity = Math.random() * 0.7 + 0.3;
-            snow.style.animationDuration = (Math.random() * 4 + 4) + 's, ' + (Math.random() * 3 + 2) + 's';
+            snow.style.animationDuration = (Math.random() * 5 + 5) + 's';
             snow.style.animationDelay = Math.random() * 5 + 's';
             field.appendChild(snow);
         }
 
         const flw = document.getElementById('follower');
         document.addEventListener('mousemove', (e) => {
-            flw.style.transform = `translate(${e.clientX - 7.5}px, ${e.clientY - 7.5}px)`;
+            flw.style.transform = `translate(${e.clientX - 5}px, ${e.clientY - 5}px)`;
         });
     </script>
 </body>
