@@ -3,127 +3,137 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Selection</title>
+<title>Archive | Nakashi Edition</title>
 
 <style>
-:root{
-    --blue:#00f0ff;
-    --glass:rgba(255,255,255,.08);
-    --ease:cubic-bezier(.2,.9,.2,1);
+:root {
+    --white: #ffffff;
+    --main-pink: #ffb7c5;
+    --dark-blue: #002b5c;
+    --tag-blue: #3498db;
+    --tag-red: #e74c3c;
+    --tag-purple: #9b59b6;
+    --tag-orange: #f39c12;
+    --tag-yellow: #f1c40f;
+    --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-*{margin:0;padding:0;box-sizing:border-box;}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-body{
-    font-family:'Segoe UI',sans-serif;
-    background:#0a0a0f;
-    color:#fff;
-    overflow:hidden;
-}
-
-/* Background */
-.bg{
-    position:fixed;
-    inset:0;
-    background:
-    radial-gradient(circle at 30% 40%, rgba(0,240,255,.15), transparent 40%),
-    radial-gradient(circle at 70% 60%, rgba(0,150,255,.15), transparent 40%),
-    url('https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/Nekoha-Shizuku.png')
-    center/cover no-repeat;
-    animation:breath 14s ease-in-out infinite alternate;
-    z-index:0;
+body, html {
+    font-family: 'Segoe UI', sans-serif;
+    background: #0a0a0a;
+    color: var(--white);
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    cursor: none;
 }
 
-@keyframes breath{
-    from{transform:scale(1);}
-    to{transform:scale(1.08);}
+/* CUSTOM CURSOR */
+.cursor {
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    background: white;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    transition: transform 0.06s ease-out;
 }
 
-/* Snow */
-.snow{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:1;
-}
-.flake{
-    position:absolute;
-    background:#fff;
-    border-radius:50%;
-    opacity:.6;
-    animation:fall linear infinite;
-}
-@keyframes fall{
-    from{transform:translateY(-10vh);}
-    to{transform:translateY(110vh);}
+/* VIDEO BACKGROUND (THAY CHO IMAGE) */
+.background-viewport {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
 }
 
-/* Grid */
-.container{
-    position:relative;
-    z-index:5;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+.background-viewport video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.65);
 }
 
-.grid{
-    display:grid;
-    grid-template-rows:repeat(3, 120px);
-    gap:30px;
-    width:400px;
+/* SNOW */
+.snow-container {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
 }
 
-/* Card */
-.card{
-    background:var(--glass);
-    backdrop-filter:blur(20px);
-    border:1px solid rgba(255,255,255,.15);
-    border-radius:20px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:1.4rem;
-    font-weight:800;
-    transition:.4s var(--ease);
-    box-shadow:0 10px 30px rgba(0,0,0,.4);
-    cursor:pointer;
+.snowflake {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: snow-fall linear infinite;
 }
 
-.card:hover{
-    transform:translateY(-8px) scale(1.05);
-    box-shadow:0 0 30px var(--blue);
+@keyframes snow-fall {
+    0% { transform: translateY(-10vh); }
+    100% { transform: translateY(110vh); }
+}
+
+/* HERO */
+.hero-section {
+    position: relative;
+    z-index: 100;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* TEAM */
+.contributors-section {
+    position: relative;
+    z-index: 100;
+    background: radial-gradient(circle at center, #001d3d 0%, #000814 100%);
+    padding: 120px 20px;
+    text-align: center;
+    overflow: hidden;
 }
 </style>
 </head>
+
 <body>
 
-<div class="bg"></div>
-<div class="snow" id="snow"></div>
+<div class="cursor" id="cursor"></div>
 
-<div class="container">
-    <div class="grid">
-        <div class="card">Text 1</div>
-        <div class="card">Text 2</div>
-        <div class="card">Text 3</div>
-    </div>
+<!-- VIDEO BACKGROUND -->
+<div class="background-viewport">
+    <video autoplay muted loop playsinline>
+        <source src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/background/12.mp4" type="video/mp4">
+    </video>
 </div>
 
+<div class="snow-container" id="snow-field"></div>
+
+<!-- PHẦN CÒN LẠI GIỮ NGUYÊN CỦA BẠN -->
+
 <script>
-/* Snow effect */
-const snow=document.getElementById("snow");
-for(let i=0;i<70;i++){
-    let f=document.createElement("div");
-    f.className="flake";
-    let size=Math.random()*4+2;
-    f.style.width=size+"px";
-    f.style.height=size+"px";
-    f.style.left=Math.random()*100+"%";
-    f.style.animationDuration=(Math.random()*6+6)+"s";
-    f.style.animationDelay=Math.random()*5+"s";
-    snow.appendChild(f);
+const field = document.getElementById('snow-field');
+for (let i = 0; i < 60; i++) {
+    const snow = document.createElement('div');
+    snow.className = 'snowflake';
+    const size = Math.random() * 3 + 2;
+    snow.style.width = size + 'px';
+    snow.style.height = size + 'px';
+    snow.style.left = Math.random() * 100 + '%';
+    snow.style.animationDuration = (Math.random() * 5 + 5) + 's';
+    field.appendChild(snow);
 }
+
+const crsr = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+    crsr.style.transform = `translate(${e.clientX - 6}px, ${e.clientY - 6}px)`;
+});
 </script>
 
 </body>
