@@ -12,7 +12,6 @@
     --dark-blue: #002b5c;
 
     --tag-blue: #3498db;
-    --tag-red: #e74c3c;
     --tag-purple: #9b59b6;
     --tag-orange: #f39c12;
     --tag-yellow: #f1c40f;
@@ -24,11 +23,29 @@
 
 body, html {
     font-family: 'Segoe UI', sans-serif;
-    background: #0a0a0a;
+    background: #000;
     color: var(--white);
     overflow-x: hidden;
     scroll-behavior: smooth;
     cursor: none;
+}
+
+/* VIDEO BACKGROUND */
+#bgVideo {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+/* FALLBACK IMAGE */
+#bgFallback {
+    position: fixed;
+    inset: 0;
+    background: url("https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/Nekoha-Shizuku.png") center/cover no-repeat;
+    z-index: -1;
 }
 
 /* CURSOR */
@@ -41,17 +58,6 @@ body, html {
     pointer-events: none;
     z-index: 9999;
     mix-blend-mode: difference;
-    transition: transform 0.06s ease-out;
-}
-
-/* VIDEO BACKGROUND (THAY IMAGE CŨ) */
-.background-video {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1;
 }
 
 /* SNOW */
@@ -84,71 +90,6 @@ body, html {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
-}
-
-.main-avatar-box {
-    position: relative;
-    margin-bottom: 25px;
-}
-
-.main-avatar-box img {
-    width: 150px;
-    border-radius: 30px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-    transition: var(--transition);
-}
-
-.main-avatar-box:hover img {
-    transform: scale(1.1) rotate(5deg);
-    box-shadow: 0 0 30px var(--main-pink);
-}
-
-.main-tag {
-    position: absolute;
-    bottom: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0,0,0,0.8);
-    padding: 6px 15px;
-    border-radius: 10px;
-    font-size: 0.85rem;
-    opacity: 0;
-    transition: var(--transition);
-    white-space: nowrap;
-    color: var(--main-pink);
-}
-
-.main-avatar-box:hover .main-tag {
-    opacity: 1;
-    bottom: -15px;
-}
-
-#main-title {
-    font-size: clamp(3rem, 10vw, 6rem);
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 12px;
-}
-
-#cta-btn {
-    margin-top: 40px;
-    padding: 18px 60px;
-    border-radius: 50px;
-    font-weight: 800;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.2);
-    backdrop-filter: blur(10px);
-    letter-spacing: 2px;
-    transition: var(--transition);
-    text-decoration: none;
-    color: white;
-}
-
-#cta-btn:hover {
-    background: white;
-    color: black;
-    transform: scale(1.1);
 }
 
 /* TEAM */
@@ -157,67 +98,42 @@ body, html {
     z-index: 100;
     background: radial-gradient(circle at center, #001d3d 0%, #000814 100%);
     padding: 120px 20px;
-    text-align: center;
-    overflow: hidden;
-}
-
-.star {
-    position: absolute;
-    background: white;
-    border-radius: 50%;
-    pointer-events: none;
-    opacity: 0.8;
-    animation: twinkle var(--duration) infinite ease-in-out;
-}
-
-@keyframes twinkle {
-    0%,100% { opacity: 0.3; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.5); }
-}
-
-.contrib-grid {
-    display: flex;
-    justify-content: center;
-    gap: 50px;
-    flex-wrap: wrap;
-    margin-top: 60px;
-}
-
-.contrib-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.img-wrapper {
-    position: relative;
-    margin-bottom: 15px;
-}
-
-.img-wrapper img {
-    width: 120px;
-    height: 120px;
-    border-radius: 20px;
-    border: 2px solid rgba(255,255,255,0.1);
-    transition: var(--transition);
 }
 </style>
 </head>
 
 <body>
 
-<div class="cursor" id="cursor"></div>
+<div id="bgFallback"></div>
 
-<!-- VIDEO BACKGROUND -->
-<video class="background-video" autoplay muted loop playsinline>
-<source src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/background/1.mp4" type="video/mp4">
+<video id="bgVideo"
+autoplay
+muted
+loop
+playsinline
+poster="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/Nekoha-Shizuku.png">
+<source src="https://nakashioshuki.github.io/background/1.mp4" type="video/mp4">
 </video>
 
+<div class="cursor" id="cursor"></div>
 <div class="snow-container" id="snow-field"></div>
 
-<!-- GIỮ NGUYÊN PHẦN HERO + TEAM CỦA BẠN Ở DƯỚI -->
+<!-- GIỮ NGUYÊN PHẦN HERO + TEAM CỦA BẠN Ở ĐÂY -->
 
 <script>
+const video = document.getElementById("bgVideo");
+
+// Nếu video load thành công → ẩn fallback
+video.addEventListener("canplay", () => {
+    document.getElementById("bgFallback").style.display = "none";
+});
+
+// Nếu video lỗi → ẩn video, giữ fallback
+video.addEventListener("error", () => {
+    video.style.display = "none";
+});
+
+/* Snow */
 const field = document.getElementById('snow-field');
 for (let i = 0; i < 60; i++) {
     const snow = document.createElement('div');
@@ -230,6 +146,7 @@ for (let i = 0; i < 60; i++) {
     field.appendChild(snow);
 }
 
+/* Cursor */
 const crsr = document.getElementById('cursor');
 document.addEventListener('mousemove', e => {
     crsr.style.transform = `translate(${e.clientX - 6}px, ${e.clientY - 6}px)`;
