@@ -1,1 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Augustus | Premium Edition</title>
+    <style>
+        :root {
+            --white: #ffffff;
+            --main-color: #ffb7c5; 
+            --transition: all 0.4s ease;
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+
+        body, html {
+            height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            color: var(--white);
+            overflow: hidden;
+        }
+
+        .background-viewport {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                        url('https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/Nekoha-Shizuku.png') no-repeat center center;
+            background-size: cover;
+            z-index: 1;
+        }
+
+        .snow-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 2; pointer-events: none;
+        }
+
+        .snowflake {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: snow-fall linear infinite;
+        }
+
+        @keyframes snow-fall {
+            0% { transform: translateY(-10vh); }
+            100% { transform: translateY(110vh); }
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 100;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .logo-box {
+            margin-bottom: 25px;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .logo-box img {
+            max-width: 130px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        #main-title { 
+            font-size: clamp(2.5rem, 8vw, 5rem); 
+            font-weight: 800; 
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            text-shadow: 0 5px 20px rgba(0,0,0,0.7);
+            transition: var(--transition);
+        }
+
+        #main-title:hover {
+            transform: scale(1.05);
+            color: var(--main-color);
+            text-shadow: 0 0 20px var(--main-color);
+            letter-spacing: 5px;
+        }
+
+        #sub-title { 
+            font-size: 1.1rem; 
+            opacity: 0.8;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+            transition: var(--transition);
+        }
+
+        #sub-title:hover {
+            color: var(--main-color);
+            letter-spacing: 4px;
+        }
+        
+        #cta-btn {
+            display: inline-block;
+            padding: 18px 60px;
+            color: var(--white);
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+        #cta-btn:hover { 
+            background: var(--main-color);
+            color: #000;
+            transform: scale(1.05);
+            border-color: transparent;
+            box-shadow: 0 0 30px var(--main-color);
+        }
+
+        .footer-copyright {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            font-size: 0.85rem;
+            opacity: 0.5;
+            letter-spacing: 1px;
+        }
+
+        .cursor-follower {
+            position: fixed;
+            width: 12px; height: 12px;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.08s ease-out;
+            mix-blend-mode: difference;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .cursor-follower { display: none; }
+            * { cursor: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cursor-follower" id="follower"></div>
+    <div class="background-viewport"></div>
+    <div class="snow-container" id="snow-field"></div>
+
+    <main class="content-wrapper">
+        <div class="logo-box">
+            <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/logo.png" alt="Logo">
+        </div>
+
+        <h1 id="main-title">Augustus Client</h1>
+        <p id="sub-title">Augustus Client Minecraft Hacking</p>
+        <a href="download.html" id="cta-btn">GET STARTED</a>
+
+        <footer class="footer-copyright">
+            Copyright © 2026 AugustusUI
+        </footer>
+    </main>
+
+    <script>
+        const field = document.getElementById('snow-field');
+        for (let i = 0; i < 50; i++) {
+            const snow = document.createElement('div');
+            snow.className = 'snowflake';
+            const size = Math.random() * 3 + 2;
+            snow.style.width = size + 'px';
+            snow.style.height = size + 'px';
+            snow.style.left = Math.random() * 100 + '%';
+            snow.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            snow.style.animationDelay = Math.random() * 5 + 's';
+            field.appendChild(snow);
+        }
+
+        const flw = document.getElementById('follower');
+        document.addEventListener('mousemove', (e) => {
+            flw.style.transform = `translate(${e.clientX - 6}px, ${e.clientY - 6}px)`;
+        });
+    </script>
+</body>
+</html>
