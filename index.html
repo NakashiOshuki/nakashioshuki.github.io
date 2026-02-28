@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Archive Client | Premium Edition</title>
+    <title>Archive | Premium</title>
     <style>
         :root {
             --primary-white: #ffffff;
@@ -11,46 +11,34 @@
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; } /* Hide default cursor for custom trail */
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
 
         body, html {
-            height: 100%;
-            font-family: 'Inter', sans-serif;
+            min-height: 150vh;
+            font-family: -apple-system, system-ui, sans-serif;
             background: #0a0a0a;
-            overflow: hidden;
             color: var(--primary-white);
+            overflow-x: hidden;
+            overflow-y: auto;
         }
 
         .background-viewport {
             position: fixed;
             inset: 0;
-            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('Nekoha-Shizuku.png') no-repeat center center;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('Nekoha-Shizuku.png') no-repeat center center;
             background-size: cover;
             z-index: 1;
         }
 
-        /* Mouse Trail Element */
         .cursor-follower {
             position: fixed;
-            width: 20px;
-            height: 20px;
-            background: rgba(255, 255, 255, 0.3);
+            width: 15px; height: 15px;
+            background: rgba(255, 255, 255, 0.4);
             border-radius: 50%;
             pointer-events: none;
             z-index: 999;
             transition: transform 0.1s ease-out;
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-
-        .mambo-gif {
-            position: fixed;
-            bottom: 40px; 
-            right: 50px;
-            width: 200px;
-            z-index: 5;
-            pointer-events: none;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+            border: 1px solid rgba(255, 255, 255, 0.6);
         }
 
         .snow-container {
@@ -61,68 +49,68 @@
 
         .snowflake {
             position: absolute;
-            top: -10px;
             background: white;
             border-radius: 50%;
-            opacity: 0.6;
+            opacity: 0.5;
             animation: fall linear infinite;
         }
 
-        @keyframes fall {
-            to { transform: translateY(105vh); }
-        }
+        @keyframes fall { to { transform: translateY(105vh); } }
 
         .content-wrapper {
             position: relative;
             z-index: 10;
-            height: 100%;
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
-            padding-left: 10vw;
-            background: linear-gradient(to right, rgba(0,0,0,0.6) 0%, transparent 100%);
+            align-items: center;
+            padding: 100px 20px;
         }
 
-        .title {
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: -2px;
-            line-height: 0.9;
+        .glass-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 40px;
+            padding: 80px 100px;
+            text-align: center;
+            max-width: 800px;
+            width: 90%;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
         }
 
-        .subtitle {
-            font-size: 1.1rem;
-            letter-spacing: 5px;
-            opacity: 0.7;
-            margin: 20px 0 40px 0;
-            text-transform: uppercase;
-        }
-
-        .action-button {
+        #main-title { font-size: clamp(2.5rem, 7vw, 5rem); font-weight: 800; text-transform: uppercase; line-height: 1; margin-bottom: 15px; }
+        #sub-title { font-size: 1.1rem; letter-spacing: 5px; opacity: 0.7; margin-bottom: 50px; text-transform: uppercase; }
+        
+        #cta-btn {
             display: inline-block;
-            width: fit-content;
-            padding: 18px 60px;
+            padding: 18px 65px;
             color: white;
             text-decoration: none;
-            background: var(--accent-glow);
-            border: 1px solid rgba(255,255,255,0.3);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
             font-weight: 600;
             letter-spacing: 2px;
             transition: var(--transition);
         }
 
-        .action-button:hover {
-            background: rgba(255,255,255,0.25);
-            transform: translateX(15px);
-            border-color: white;
+        #cta-btn:hover { background: rgba(255, 255, 255, 0.2); transform: translateY(-5px); border-color: white; }
+
+        .footer-copyright {
+            position: relative;
+            padding: 50px 0;
+            text-align: center;
+            z-index: 10;
+            font-size: 0.9rem;
+            opacity: 0.5;
+            letter-spacing: 1px;
         }
 
         @media (max-width: 768px) {
-            .content-wrapper { align-items: center; padding-left: 0; text-align: center; }
-            .mambo-gif { width: 140px; right: 20px; bottom: 20px; }
-            .cursor-follower { display: none; } /* Disable on mobile */
+            .glass-container { padding: 50px 30px; }
+            .cursor-follower { display: none; }
             * { cursor: auto; }
         }
     </style>
@@ -131,34 +119,45 @@
 
     <div class="cursor-follower" id="follower"></div>
     <div class="background-viewport"></div>
-
-    <img src="mambo-matikanetannhauser (1).gif" class="mambo-gif" alt="">
-
     <div class="snow-container" id="snow-field"></div>
 
     <main class="content-wrapper">
-        <h1 class="title">Archive<br>Client</h1>
-        <p class="subtitle">Next-Gen Performance</p>
-        <a href="#" class="action-button">GET STARTED</a>
+        <div class="glass-container">
+            <div id="main-title"></div>
+            <div id="sub-title"></div>
+            <a href="#" id="cta-btn"></a>
+        </div>
     </main>
 
+    <footer class="footer-copyright" id="footer-text"></footer>
+
     <script>
-        // Snow Effect
-        const container = document.getElementById('snow-field');
+        const UI_TEXT = {
+            title: "Archive Client",
+            subtitle: "Next-Gen Performance",
+            button: "GET STARTED",
+            footer: "Copyright © 2026 ArchiveUI"
+        };
+
+        document.getElementById('main-title').innerText = UI_TEXT.title;
+        document.getElementById('sub-title').innerText = UI_TEXT.subtitle;
+        document.getElementById('cta-btn').innerText = UI_TEXT.button;
+        document.getElementById('footer-text').innerText = UI_TEXT.footer;
+
+        const snow = document.getElementById('snow-field');
         for (let i = 0; i < 60; i++) {
-            const flake = document.createElement('div');
-            flake.className = 'snowflake';
-            flake.style.left = Math.random() * 100 + '%';
-            flake.style.width = flake.style.height = (Math.random() * 4 + 2) + 'px';
-            flake.style.animationDuration = (Math.random() * 7 + 5) + 's';
-            flake.style.animationDelay = Math.random() * 5 + 's';
-            container.appendChild(flake);
+            const f = document.createElement('div');
+            f.className = 'snowflake';
+            f.style.left = Math.random() * 100 + '%';
+            f.style.width = f.style.height = (Math.random() * 3 + 2) + 'px';
+            f.style.animationDuration = (Math.random() * 8 + 6) + 's';
+            f.style.animationDelay = Math.random() * 5 + 's';
+            snow.appendChild(f);
         }
 
-        // Mouse Follower Effect
         const follower = document.getElementById('follower');
         document.addEventListener('mousemove', (e) => {
-            follower.style.transform = `translate(${e.clientX - 10}px, ${e.clientY - 10}px)`;
+            follower.style.transform = `translate(${e.clientX - 7.5}px, ${e.clientY - 7.5}px)`;
         });
     </script>
 </body>
