@@ -7,15 +7,15 @@
     <style>
         :root {
             --white: #ffffff;
-            --main-color: #ffb7c5; /* Màu hồng nhẹ hợp với anime */
-            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --main-color: #ffb7c5; 
+            --transition: all 0.4s ease;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
 
         body, html {
             height: 100vh;
-            font-family: -apple-system, system-ui, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #0a0a0a;
             color: var(--white);
             overflow: hidden;
@@ -60,75 +60,57 @@
             text-align: center;
         }
 
-        .animate-text {
-            opacity: 0;
-            transform: translateY(50px);
-            animation: pushUp 1.2s var(--transition) forwards;
-            transition: var(--transition);
-            display: inline-block;
-        }
-
-        /* --- Hiệu ứng hay hay khi di chuột vào tiêu đề --- */
+        /* --- TIÊU ĐỀ CHÍNH (Đã fix mất chữ) --- */
         #main-title { 
             font-size: clamp(2.5rem, 8vw, 5.5rem); 
             font-weight: 900; 
             text-transform: uppercase;
             margin-bottom: 10px;
             text-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            animation-delay: 0.2s;
-            user-select: none;
+            transition: var(--transition);
+            opacity: 1 !important; /* Đảm bảo luôn hiện */
+            transform: translateY(0) !important;
         }
 
         #main-title:hover {
-            transform: scale(1.1) rotate(-2deg);
+            transform: scale(1.05);
             color: var(--main-color);
-            text-shadow: 0 0 20px var(--main-color), 0 0 40px var(--main-color);
-            letter-spacing: 10px;
+            text-shadow: 0 0 20px var(--main-color);
+            letter-spacing: 5px;
         }
 
         #sub-title { 
             font-size: 1.2rem; 
-            opacity: 0.8;
+            opacity: 0.9;
             margin-bottom: 45px;
             letter-spacing: 2px;
-            animation-delay: 0.5s;
+            transition: var(--transition);
         }
 
         #sub-title:hover {
-            opacity: 1;
-            letter-spacing: 5px;
             color: var(--main-color);
+            letter-spacing: 4px;
         }
-        /* ----------------------------------------------- */
         
         #cta-btn {
             display: inline-block;
-            padding: 20px 70px;
+            padding: 18px 65px;
             color: var(--white);
             text-decoration: none;
             background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
             font-weight: 700;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             transition: var(--transition);
-            backdrop-filter: blur(15px);
-            opacity: 0;
-            transform: translateY(30px);
-            animation: pushUp 1.2s var(--transition) forwards;
-            animation-delay: 0.8s;
+            backdrop-filter: blur(10px);
         }
 
         #cta-btn:hover { 
             background: var(--main-color);
             color: #000;
-            transform: scale(1.1) translateY(-5px);
-            box-shadow: 0 0 30px var(--main-color);
-            border-color: transparent;
-        }
-
-        @keyframes pushUp {
-            to { opacity: 1; transform: translateY(0); }
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 183, 197, 0.4);
         }
 
         .footer-copyright {
@@ -138,8 +120,7 @@
             transform: translateX(-50%);
             z-index: 100;
             font-size: 0.85rem;
-            opacity: 0.4;
-            letter-spacing: 1px;
+            opacity: 0.5;
         }
 
         .cursor-follower {
@@ -152,6 +133,11 @@
             transition: transform 0.08s ease-out;
             mix-blend-mode: difference;
         }
+
+        @media (max-width: 768px) {
+            .cursor-follower { display: none; }
+            * { cursor: auto; }
+        }
     </style>
 </head>
 <body>
@@ -161,8 +147,8 @@
     <div class="snow-container" id="snow-field"></div>
 
     <main class="content-wrapper">
-        <h1 id="main-title" class="animate-text">Archive Client</h1>
-        <p id="sub-title" class="animate-text">Archive Client Minecraft Hacking</p>
+        <h1 id="main-title">Archive Client</h1>
+        <p id="sub-title">Archive Client Minecraft Hacking</p>
         <a href="download.html" id="cta-btn">GET STARTED</a>
 
         <footer class="footer-copyright">
@@ -171,6 +157,7 @@
     </main>
 
     <script>
+        // Hiệu ứng tuyết rơi
         const field = document.getElementById('snow-field');
         for (let i = 0; i < 60; i++) {
             const snow = document.createElement('div');
@@ -184,6 +171,7 @@
             field.appendChild(snow);
         }
 
+        // Follower chuột
         const flw = document.getElementById('follower');
         document.addEventListener('mousemove', (e) => {
             flw.style.transform = `translate(${e.clientX - 6}px, ${e.clientY - 6}px)`;
