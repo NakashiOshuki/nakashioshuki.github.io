@@ -13,11 +13,12 @@
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
 
         body, html {
-            height: 100%;
+            min-height: 150vh;
             font-family: -apple-system, system-ui, sans-serif;
             background: #0a0a0a;
             color: var(--white);
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
 
         .background-viewport {
@@ -39,35 +40,35 @@
             border: 1px solid rgba(255, 255, 255, 0.6);
         }
 
-        .sakura-container {
+        .snow-container {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: 2; pointer-events: none;
         }
 
-        .petal {
+        .snowflake {
             position: absolute;
-            background-color: #ffb7c5;
-            border-radius: 150% 0 150% 0;
+            background: white;
+            border-radius: 50%;
             opacity: 0.8;
-            transform-origin: center;
-            animation: sakura-fall linear infinite, sakura-sway ease-in-out infinite;
+            filter: blur(1px);
+            animation: snow-fall linear infinite, snow-shake ease-in-out infinite;
         }
 
-        @keyframes sakura-fall {
-            0% { top: -10%; transform: translateX(0) rotate(0deg); }
-            100% { top: 110%; transform: translateX(100px) rotate(720deg); }
+        @keyframes snow-fall {
+            0% { top: -10%; }
+            100% { top: 110%; }
         }
 
-        @keyframes sakura-sway {
+        @keyframes snow-shake {
             0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(80px); }
+            50% { transform: translateX(30px); }
         }
 
         .content-wrapper {
             position: relative;
             z-index: 10;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -125,10 +126,9 @@
         }
 
         .footer-copyright {
-            position: fixed;
-            bottom: 15px;
-            left: 0;
-            width: 100%;
+            position: relative;
+            margin-top: 50vh;
+            padding: 50px 0;
             text-align: center;
             z-index: 10;
             font-size: 0.85rem;
@@ -146,7 +146,7 @@
 
     <div class="cursor-follower" id="follower"></div>
     <div class="background-viewport"></div>
-    <div class="sakura-container" id="sakura-field"></div>
+    <div class="snow-container" id="snow-field"></div>
 
     <main class="content-wrapper">
         <div class="text-content-only">
@@ -171,17 +171,18 @@
         document.getElementById('cta-btn').textContent = DATA.b;
         document.getElementById('footer-text').textContent = DATA.f;
 
-        const field = document.getElementById('sakura-field');
-        for (let i = 0; i < 50; i++) {
-            const petal = document.createElement('div');
-            petal.className = 'petal';
-            const size = Math.random() * 10 + 10;
-            petal.style.width = size + 'px';
-            petal.style.height = (size * 0.8) + 'px';
-            petal.style.left = Math.random() * 100 + '%';
-            petal.style.animationDuration = (Math.random() * 5 + 5) + 's', (Math.random() * 2 + 2) + 's';
-            petal.style.animationDelay = Math.random() * 5 + 's';
-            field.appendChild(petal);
+        const field = document.getElementById('snow-field');
+        for (let i = 0; i < 80; i++) {
+            const snow = document.createElement('div');
+            snow.className = 'snowflake';
+            const size = Math.random() * 4 + 2;
+            snow.style.width = size + 'px';
+            snow.style.height = size + 'px';
+            snow.style.left = Math.random() * 100 + '%';
+            snow.style.opacity = Math.random();
+            snow.style.animationDuration = (Math.random() * 3 + 4) + 's', (Math.random() * 2 + 2) + 's';
+            snow.style.animationDelay = Math.random() * 5 + 's';
+            field.appendChild(snow);
         }
 
         const flw = document.getElementById('follower');
