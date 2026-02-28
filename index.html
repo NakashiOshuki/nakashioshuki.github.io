@@ -8,7 +8,8 @@
         :root {
             --white: #ffffff;
             --main-pink: #ffb7c5; 
-            --dark-blue: #002b5c;
+            --dark-night: #000814;
+            --deep-blue: #001d3d;
             --tag-blue: #3498db;
             --tag-red: #e74c3c;
             --tag-purple: #9b59b6;
@@ -20,7 +21,7 @@
 
         body, html {
             font-family: 'Segoe UI', sans-serif;
-            background: #0a0a0a;
+            background: var(--dark-night);
             color: var(--white);
             overflow-x: hidden;
             scroll-behavior: smooth;
@@ -29,30 +30,28 @@
         .background-viewport {
             position: fixed;
             inset: 0;
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
-                        url('https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/Nekoha-Shizuku.png') no-repeat center center;
-            background-size: cover;
+            background: radial-gradient(circle at center, var(--deep-blue) 0%, var(--dark-night) 100%);
             z-index: 1;
         }
 
-        .snow-container {
+        .star-container {
             position: fixed;
             inset: 0;
             z-index: 2;
             pointer-events: none;
         }
 
-        .snowflake {
+        .star {
             position: absolute;
             background: white;
             border-radius: 50%;
-            opacity: 0.6;
-            animation: snow-fall linear infinite;
+            opacity: 0.8;
+            animation: twinkle var(--duration) infinite ease-in-out;
         }
 
-        @keyframes snow-fall {
-            0% { transform: translateY(-10vh); }
-            100% { transform: translateY(110vh); }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
         }
 
         .hero-section {
@@ -66,7 +65,6 @@
             text-align: center;
         }
 
-        /* TIÊU ĐỀ CHÍNH VỚI HIỆU ỨNG GLITCH HIỆN ĐẠI */
         #main-title { 
             font-size: clamp(3rem, 10vw, 6rem); 
             font-weight: 900; 
@@ -74,17 +72,13 @@
             letter-spacing: 12px;
             color: #fff;
             position: relative;
-            text-shadow: 0 0 10px rgba(255,255,255,0.3);
-            transition: all 0.3s;
+            transition: var(--transition);
         }
 
         #main-title:hover {
             transform: scale(1.05);
             color: var(--main-pink);
-            text-shadow: 
-                3px 3px 0px #ff00ea, 
-                -3px -3px 0px #00eaff,
-                0 0 30px var(--main-pink);
+            text-shadow: 3px 3px 0px #ff00ea, -3px -3px 0px #00eaff, 0 0 30px var(--main-pink);
             letter-spacing: 15px;
         }
 
@@ -96,119 +90,63 @@
         }
 
         #main-title:hover::before {
-            opacity: 0.7;
-            color: #ff00ea;
-            z-index: -1;
-            animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+            opacity: 0.7; color: #ff00ea; z-index: -1;
+            animation: glitch 0.3s infinite;
         }
 
         #main-title:hover::after {
-            opacity: 0.7;
-            color: #00eaff;
-            z-index: -2;
-            animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) reverse both infinite;
+            opacity: 0.7; color: #00eaff; z-index: -2;
+            animation: glitch 0.3s reverse infinite;
         }
 
         @keyframes glitch {
             0% { transform: translate(0); }
-            20% { transform: translate(-3px, 3px); }
-            40% { transform: translate(-3px, -3px); }
-            60% { transform: translate(3px, 3px); }
-            80% { transform: translate(3px, -3px); }
+            20% { transform: translate(-3px, 2px); }
+            40% { transform: translate(-3px, -2px); }
+            60% { transform: translate(3px, 2px); }
+            80% { transform: translate(3px, -2px); }
             100% { transform: translate(0); }
         }
 
-        .main-avatar-box {
-            position: relative;
-            margin-bottom: 25px;
-        }
-
+        .main-avatar-box { position: relative; margin-bottom: 25px; }
         .main-avatar-box img {
-            width: 150px;
-            border-radius: 30px;
+            width: 150px; border-radius: 30px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.5);
             transition: var(--transition);
         }
-
-        .main-avatar-box:hover img { 
-            transform: scale(1.1) rotate(5deg); 
-            box-shadow: 0 0 30px var(--main-pink);
-        }
-
+        .main-avatar-box:hover img { transform: scale(1.1) rotate(5deg); box-shadow: 0 0 30px var(--main-pink); }
         .main-tag {
-            position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0,0,0,0.8);
-            padding: 6px 15px;
-            border-radius: 10px;
-            font-size: 0.85rem;
-            opacity: 0;
-            transition: var(--transition);
-            white-space: nowrap;
-            color: var(--main-pink);
+            position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%);
+            background: rgba(0,0,0,0.8); padding: 6px 15px; border-radius: 10px;
+            font-size: 0.85rem; opacity: 0; transition: var(--transition);
+            white-space: nowrap; color: var(--main-pink);
         }
-
         .main-avatar-box:hover .main-tag { opacity: 1; bottom: -15px; }
 
         #cta-btn {
-            margin-top: 40px;
-            display: inline-block;
-            padding: 18px 60px;
-            color: var(--white);
-            text-decoration: none;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50px;
-            font-weight: 800;
-            transition: var(--transition);
-            backdrop-filter: blur(10px);
-            letter-spacing: 2px;
+            margin-top: 40px; display: inline-block; padding: 18px 60px;
+            color: var(--white); text-decoration: none;
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px; font-weight: 800; transition: var(--transition);
+            backdrop-filter: blur(10px); letter-spacing: 2px;
         }
-
-        #cta-btn:hover { 
-            background: #fff; 
-            color: #000; 
-            transform: scale(1.1);
-            box-shadow: 0 0 30px #fff;
-        }
+        #cta-btn:hover { background: #fff; color: #000; transform: scale(1.1); box-shadow: 0 0 30px #fff; }
 
         .contributors-section {
-            position: relative;
-            z-index: 100;
-            background: #050505;
-            padding: 120px 20px;
-            text-align: center;
+            position: relative; z-index: 100;
+            background: rgba(0, 8, 20, 0.9); padding: 120px 20px; text-align: center;
         }
 
         .contrib-grid {
-            display: flex;
-            justify-content: center;
-            gap: 50px;
-            flex-wrap: wrap;
-            margin-top: 60px;
+            display: flex; justify-content: center; gap: 50px; flex-wrap: wrap; margin-top: 60px;
         }
 
-        .contrib-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .img-wrapper {
-            position: relative;
-            margin-bottom: 15px;
-        }
-
+        .contrib-card { display: flex; flex-direction: column; align-items: center; }
+        .img-wrapper { position: relative; margin-bottom: 15px; }
         .img-wrapper img {
-            width: 120px;
-            height: 120px;
-            border-radius: 20px;
-            border: 2px solid rgba(255,255,255,0.1);
-            transition: var(--transition);
+            width: 120px; height: 120px; border-radius: 20px;
+            border: 2px solid rgba(255,255,255,0.1); transition: var(--transition);
         }
-
         .img-wrapper:hover img { transform: translateY(-15px) scale(1.05); }
 
         .contrib-card:nth-child(1) .img-wrapper:hover img { box-shadow: 0 0 30px var(--tag-blue); }
@@ -217,43 +155,28 @@
         .contrib-card:nth-child(4) .img-wrapper:hover img { box-shadow: 0 0 30px var(--tag-orange); }
 
         .hover-name {
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 5px 12px;
-            border-radius: 8px;
-            font-size: 0.75rem;
-            opacity: 0;
-            transition: 0.3s;
-            white-space: nowrap;
+            position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
+            padding: 5px 12px; border-radius: 8px; font-size: 0.75rem; opacity: 0;
+            transition: 0.3s; white-space: nowrap;
         }
-
         .img-wrapper:hover .hover-name { opacity: 1; top: -50px; }
 
-        .contrib-card p { font-weight: 800; letter-spacing: 1px; font-size: 0.9rem; margin-top: 10px; }
-
         .cursor {
-            position: fixed;
-            width: 12px; height: 12px;
-            background: white;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.08s ease-out;
-            mix-blend-mode: difference;
+            position: fixed; width: 12px; height: 12px; background: white;
+            border-radius: 50%; pointer-events: none; z-index: 9999;
+            transition: transform 0.08s ease-out; mix-blend-mode: difference;
         }
     </style>
 </head>
 <body>
 
     <div class="cursor" id="cursor"></div>
-    <div class="background-viewport" id="bg"></div>
-    <div class="snow-container" id="snow-field"></div>
+    <div class="background-viewport"></div>
+    <div class="star-container" id="star-field"></div>
 
     <main class="hero-section">
         <div class="main-avatar-box">
-            <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/2059e956374eb0ce2173f49214eb53bc.png" alt="MiorisNakashi">
+            <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/2059e956374eb0ce2173f49214eb53bc.png">
             <span class="main-tag">@miorisnakashi</span>
         </div>
         <h1 id="main-title">Archive Client</h1>
@@ -262,7 +185,7 @@
     </main>
 
     <section class="contributors-section">
-        <h2 style="font-size: 2.5rem; letter-spacing: 5px; margin-bottom: 20px;">TEAM MEMBERS</h2>
+        <h2 style="font-size: 2.5rem; letter-spacing: 5px;">TEAM MEMBERS</h2>
         <div class="contrib-grid">
             <div class="contrib-card">
                 <div class="img-wrapper">
@@ -296,17 +219,17 @@
     </section>
 
     <script>
-        const field = document.getElementById('snow-field');
-        for (let i = 0; i < 70; i++) {
-            const snow = document.createElement('div');
-            snow.className = 'snowflake';
-            const size = Math.random() * 3 + 2;
-            snow.style.width = size + 'px';
-            snow.style.height = size + 'px';
-            snow.style.left = Math.random() * 100 + '%';
-            snow.style.animationDuration = (Math.random() * 5 + 5) + 's';
-            snow.style.animationDelay = Math.random() * 5 + 's';
-            field.appendChild(snow);
+        const field = document.getElementById('star-field');
+        for (let i = 0; i < 150; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 2 + 1;
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
+            field.appendChild(star);
         }
         const crsr = document.getElementById('cursor');
         document.addEventListener('mousemove', (e) => {
