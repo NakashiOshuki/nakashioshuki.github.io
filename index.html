@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Archive | Nakashi Edition</title>
 
+<!-- Preload video -->
+<link rel="preload" as="video"
+href="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/background/bg.mp4"
+type="video/mp4">
+
 <style>
 :root {
     --white: #ffffff;
@@ -31,7 +36,7 @@ body, html {
     cursor: none;
 }
 
-/* CUSTOM CURSOR */
+/* CURSOR */
 .cursor {
     position: fixed;
     width: 12px;
@@ -52,6 +57,12 @@ body, html {
     height: 100%;
     object-fit: cover;
     z-index: 0;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+}
+
+.background-video.loaded {
+    opacity: 1;
 }
 
 .video-overlay {
@@ -136,16 +147,6 @@ body, html {
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 12px;
-    transition: 0.3s;
-}
-
-#main-title:hover {
-    transform: scale(1.05);
-    color: var(--main-pink);
-    text-shadow:
-        3px 3px 0px #ff00ea,
-        -3px -3px 0px #00eaff,
-        0 0 30px var(--main-pink);
 }
 
 #cta-btn {
@@ -166,7 +167,6 @@ body, html {
     background: white;
     color: black;
     transform: scale(1.1);
-    box-shadow: 0 0 30px white;
 }
 
 /* TEAM */
@@ -223,29 +223,6 @@ body, html {
 .img-wrapper:hover img {
     transform: translateY(-15px) scale(1.05);
 }
-
-.contrib-card:nth-child(1) .img-wrapper:hover img { box-shadow: 0 0 30px var(--tag-yellow); }
-.contrib-card:nth-child(2) .img-wrapper:hover img { box-shadow: 0 0 30px var(--tag-blue); }
-.contrib-card:nth-child(3) .img-wrapper:hover img { box-shadow: 0 0 30px var(--tag-purple); }
-.contrib-card:nth-child(4) .img-wrapper:hover img { box-shadow: 0 0 30px var(--tag-orange); }
-
-.hover-name {
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 5px 12px;
-    border-radius: 8px;
-    font-size: 0.75rem;
-    opacity: 0;
-    transition: 0.3s;
-    white-space: nowrap;
-}
-
-.img-wrapper:hover .hover-name {
-    opacity: 1;
-    top: -50px;
-}
 </style>
 </head>
 
@@ -253,92 +230,64 @@ body, html {
 
 <div class="cursor" id="cursor"></div>
 
-<!-- VIDEO BACKGROUND -->
-<video class="background-video" autoplay muted loop playsinline>
-    <source src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/background/bg.mp4" type="video/mp4">
+<!-- VIDEO -->
+<video class="background-video"
+id="bgVideo"
+autoplay muted loop playsinline preload="auto"
+poster="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/Nekoha-Shizuku.png">
+<source src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/background/bg.mp4" type="video/mp4">
 </video>
 <div class="video-overlay"></div>
 
 <div class="snow-container" id="snow-field"></div>
 
 <main class="hero-section">
-    <div class="main-avatar-box">
-        <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/2059e956374eb0ce2173f49214eb53bc.png">
-        <span class="main-tag">@miorisnakashi</span>
-    </div>
+<div class="main-avatar-box">
+<img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/2059e956374eb0ce2173f49214eb53bc.png">
+<span class="main-tag">@miorisnakashi</span>
+</div>
 
-    <h1 id="main-title">Archive Client</h1>
-    <p style="opacity:0.6;letter-spacing:4px;font-weight:300;">NEXT GENERATION EXPLOIT</p>
-    <a href="download.html" id="cta-btn">DOWNLOAD NOW</a>
+<h1 id="main-title">Archive Client</h1>
+<p style="opacity:0.6;letter-spacing:4px;font-weight:300;">NEXT GENERATION EXPLOIT</p>
+<a href="download.html" id="cta-btn">DOWNLOAD NOW</a>
 </main>
 
 <section class="contributors-section" id="team-area">
-    <h2 style="font-size:2.5rem;letter-spacing:5px;">TEAM MEMBERS</h2>
-
-    <div class="contrib-grid">
-        <div class="contrib-card">
-            <div class="img-wrapper">
-                <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/5592f317c7eb53c8b45066aacf5f88fc.png">
-                <span class="hover-name" style="background: var(--tag-yellow);">@thesmartcat2303</span>
-            </div>
-            <p>THE SMART CAT</p>
-        </div>
-
-        <div class="contrib-card">
-            <div class="img-wrapper">
-                <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/70578351.jpg">
-                <span class="hover-name" style="background: var(--tag-blue);">@_realserenity</span>
-            </div>
-            <p>FMCPE</p>
-        </div>
-
-        <div class="contrib-card">
-            <div class="img-wrapper">
-                <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/28ca46ac57c5487abc677ebb9b8928fa.png">
-                <span class="hover-name" style="background: var(--tag-purple);">@zero__mc</span>
-            </div>
-            <p>4هززي</p>
-        </div>
-
-        <div class="contrib-card">
-            <div class="img-wrapper">
-                <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/84dadce511ea23b434e11af3e9c362da.png">
-                <span class="hover-name" style="background: var(--tag-orange);">@toidicakhia</span>
-            </div>
-            <p>TOIDICAKHIA</p>
-        </div>
-    </div>
+<h2 style="font-size:2.5rem;letter-spacing:5px;">TEAM MEMBERS</h2>
+<div class="contrib-grid">
+<div class="contrib-card">
+<div class="img-wrapper">
+<img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/5592f317c7eb53c8b45066aacf5f88fc.png">
+<span class="hover-name" style="background:#f1c40f;">@thesmartcat2303</span>
+</div>
+<p>THE SMART CAT</p>
+</div>
+</div>
 </section>
 
 <script>
+const video = document.getElementById("bgVideo");
+video.addEventListener("canplaythrough", () => {
+video.classList.add("loaded");
+});
+
+/* Snow */
 const field = document.getElementById('snow-field');
 for (let i = 0; i < 60; i++) {
-    const snow = document.createElement('div');
-    snow.className = 'snowflake';
-    const size = Math.random() * 3 + 2;
-    snow.style.width = size + 'px';
-    snow.style.height = size + 'px';
-    snow.style.left = Math.random() * 100 + '%';
-    snow.style.animationDuration = (Math.random() * 5 + 5) + 's';
-    field.appendChild(snow);
+const snow = document.createElement('div');
+snow.className = 'snowflake';
+const size = Math.random() * 3 + 2;
+snow.style.width = size + 'px';
+snow.style.height = size + 'px';
+snow.style.left = Math.random() * 100 + '%';
+snow.style.animationDuration = (Math.random() * 5 + 5) + 's';
+field.appendChild(snow);
 }
 
-const teamArea = document.getElementById('team-area');
-for (let i = 0; i < 60; i++) {
-    const star = document.createElement('div');
-    star.className = 'star';
-    const size = Math.random() * 2 + 1;
-    star.style.width = size + 'px';
-    star.style.height = size + 'px';
-    star.style.left = Math.random() * 100 + '%';
-    star.style.top = Math.random() * 100 + '%';
-    star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
-    teamArea.appendChild(star);
-}
-
+/* Cursor */
 const crsr = document.getElementById('cursor');
 document.addEventListener('mousemove', e => {
-    crsr.style.transform = `translate(${e.clientX - 6}px, ${e.clientY - 6}px)`;
+crsr.style.transform = `translate(${e.clientX - 6}px, ${e.clientY - 6}px)`;
 });
 </script>
 
