@@ -93,6 +93,23 @@ body{
     to{opacity:1;transform:translate(-50%,-50%) scale(1);}
 }
 
+/* Close button */
+.close-btn{
+    position:absolute;
+    top:15px;
+    right:20px;
+    font-size:28px;
+    font-weight:bold;
+    color:#fff;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.close-btn:hover{
+    color:var(--blue);
+    transform:scale(1.2);
+}
+
 /* Glow logo */
 .logo{
     width:140px;
@@ -125,7 +142,7 @@ body{
     transform:translateY(-4px);
 }
 
-/* Overlay (KHÔNG blur nữa) */
+/* Overlay */
 .overlay{
     position:fixed;
     inset:0;
@@ -215,18 +232,22 @@ document.addEventListener("mousemove",e=>{
  cursor.style.transform=`translate(${e.clientX-6}px,${e.clientY-6}px)`;
 });
 
-/* Expand logic */
 const cards=document.querySelectorAll(".card");
 const overlay=document.getElementById("overlay");
+
+function closeCard(card){
+    card.classList.remove("active");
+    card.innerHTML = card.getAttribute("data-title");
+    overlay.classList.remove("show");
+}
 
 cards.forEach(card=>{
     card.addEventListener("click",()=>{
         if(card.classList.contains("active")) return;
 
-        const title = card.getAttribute("data-title");
-
         card.classList.add("active");
         card.innerHTML = `
+            <div class="close-btn">✕</div>
             <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/refs/heads/main/logo.png" class="logo">
             <div class="version">B4.20.3</div>
             <a href="https://www.mediafire.com/file/ujehqgqyn2nn28b/Augustus+launcher.rar/file" target="_blank" class="dl">
@@ -235,18 +256,19 @@ cards.forEach(card=>{
         `;
 
         overlay.classList.add("show");
+
+        card.querySelector(".close-btn").onclick = () => closeCard(card);
     });
 });
 
 overlay.addEventListener("click",()=>{
-    cards.forEach(card=>{
-        if(card.classList.contains("active")){
-            const title = card.getAttribute("data-title");
-            card.classList.remove("active");
-            card.innerHTML = title;
-        }
-    });
-    overlay.classList.remove("show");
+    document.querySelectorAll(".card.active").forEach(closeCard);
+});
+
+document.addEventListener("keydown",e=>{
+    if(e.key==="Escape"){
+        document.querySelectorAll(".card.active").forEach(closeCard);
+    }
 });
 </script>
 
