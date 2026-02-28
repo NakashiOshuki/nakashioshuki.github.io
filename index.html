@@ -8,8 +8,6 @@
         :root {
             --white: #ffffff;
             --main-pink: #ffb7c5; 
-            --dark-night: #000814;
-            --deep-blue: #001d3d;
             --tag-blue: #3498db;
             --tag-red: #e74c3c;
             --tag-purple: #9b59b6;
@@ -21,24 +19,35 @@
 
         body, html {
             font-family: 'Segoe UI', sans-serif;
-            background: var(--dark-night);
+            background: #000;
             color: var(--white);
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
 
-        .background-viewport {
-            position: fixed;
-            inset: 0;
-            background: radial-gradient(circle at center, var(--deep-blue) 0%, var(--dark-night) 100%);
-            z-index: 1;
+        /* PHẦN ĐẦU: GIỮ NGUYÊN ẢNH ANIME */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), 
+                        url('https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/Nekoha-Shizuku.png') no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
         }
 
-        .star-container {
-            position: fixed;
-            inset: 0;
-            z-index: 2;
-            pointer-events: none;
+        /* PHẦN TEAM: ĐỔI SANG XANH ĐẬM + SAO */
+        .contributors-section {
+            position: relative;
+            background: radial-gradient(circle at center, #001d3d 0%, #000814 100%);
+            padding: 120px 20px;
+            text-align: center;
+            min-height: 100vh;
+            overflow: hidden;
         }
 
         .star {
@@ -47,22 +56,12 @@
             border-radius: 50%;
             opacity: 0.8;
             animation: twinkle var(--duration) infinite ease-in-out;
+            pointer-events: none;
         }
 
         @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.5); }
-        }
-
-        .hero-section {
-            position: relative;
-            z-index: 100;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.4); }
         }
 
         #main-title { 
@@ -72,7 +71,6 @@
             letter-spacing: 12px;
             color: #fff;
             position: relative;
-            transition: var(--transition);
         }
 
         #main-title:hover {
@@ -80,86 +78,40 @@
             color: var(--main-pink);
             text-shadow: 3px 3px 0px #ff00ea, -3px -3px 0px #00eaff, 0 0 30px var(--main-pink);
             letter-spacing: 15px;
+            transition: 0.3s;
         }
 
-        #main-title::before, #main-title::after {
-            content: "Archive Client";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            opacity: 0;
-        }
-
-        #main-title:hover::before {
-            opacity: 0.7; color: #ff00ea; z-index: -1;
-            animation: glitch 0.3s infinite;
-        }
-
-        #main-title:hover::after {
-            opacity: 0.7; color: #00eaff; z-index: -2;
-            animation: glitch 0.3s reverse infinite;
-        }
-
-        @keyframes glitch {
-            0% { transform: translate(0); }
-            20% { transform: translate(-3px, 2px); }
-            40% { transform: translate(-3px, -2px); }
-            60% { transform: translate(3px, 2px); }
-            80% { transform: translate(3px, -2px); }
-            100% { transform: translate(0); }
-        }
-
-        .main-avatar-box { position: relative; margin-bottom: 25px; }
         .main-avatar-box img {
             width: 150px; border-radius: 30px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.5);
             transition: var(--transition);
         }
-        .main-avatar-box:hover img { transform: scale(1.1) rotate(5deg); box-shadow: 0 0 30px var(--main-pink); }
-        .main-tag {
-            position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%);
-            background: rgba(0,0,0,0.8); padding: 6px 15px; border-radius: 10px;
-            font-size: 0.85rem; opacity: 0; transition: var(--transition);
-            white-space: nowrap; color: var(--main-pink);
-        }
-        .main-avatar-box:hover .main-tag { opacity: 1; bottom: -15px; }
+        .main-avatar-box:hover img { transform: scale(1.1) rotate(5deg); }
 
         #cta-btn {
             margin-top: 40px; display: inline-block; padding: 18px 60px;
             color: var(--white); text-decoration: none;
-            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 50px; font-weight: 800; transition: var(--transition);
-            backdrop-filter: blur(10px); letter-spacing: 2px;
+            backdrop-filter: blur(10px);
         }
-        #cta-btn:hover { background: #fff; color: #000; transform: scale(1.1); box-shadow: 0 0 30px #fff; }
-
-        .contributors-section {
-            position: relative; z-index: 100;
-            background: rgba(0, 8, 20, 0.9); padding: 120px 20px; text-align: center;
-        }
+        #cta-btn:hover { background: #fff; color: #000; box-shadow: 0 0 30px #fff; }
 
         .contrib-grid {
             display: flex; justify-content: center; gap: 50px; flex-wrap: wrap; margin-top: 60px;
+            position: relative; z-index: 5;
         }
 
-        .contrib-card { display: flex; flex-direction: column; align-items: center; }
-        .img-wrapper { position: relative; margin-bottom: 15px; }
         .img-wrapper img {
-            width: 120px; height: 120px; border-radius: 20px;
+            width: 130px; height: 130px; border-radius: 25px;
             border: 2px solid rgba(255,255,255,0.1); transition: var(--transition);
         }
-        .img-wrapper:hover img { transform: translateY(-15px) scale(1.05); }
+        .img-wrapper:hover img { transform: translateY(-15px); }
 
         .contrib-card:nth-child(1) .img-wrapper:hover img { box-shadow: 0 0 30px var(--tag-blue); }
         .contrib-card:nth-child(2) .img-wrapper:hover img { box-shadow: 0 0 30px var(--tag-red); }
         .contrib-card:nth-child(3) .img-wrapper:hover img { box-shadow: 0 0 30px var(--tag-purple); }
         .contrib-card:nth-child(4) .img-wrapper:hover img { box-shadow: 0 0 30px var(--tag-orange); }
-
-        .hover-name {
-            position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
-            padding: 5px 12px; border-radius: 8px; font-size: 0.75rem; opacity: 0;
-            transition: 0.3s; white-space: nowrap;
-        }
-        .img-wrapper:hover .hover-name { opacity: 1; top: -50px; }
 
         .cursor {
             position: fixed; width: 12px; height: 12px; background: white;
@@ -171,56 +123,41 @@
 <body>
 
     <div class="cursor" id="cursor"></div>
-    <div class="background-viewport"></div>
-    <div class="star-container" id="star-field"></div>
 
     <main class="hero-section">
         <div class="main-avatar-box">
             <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/2059e956374eb0ce2173f49214eb53bc.png">
-            <span class="main-tag">@miorisnakashi</span>
         </div>
         <h1 id="main-title">Archive Client</h1>
-        <p style="opacity: 0.6; letter-spacing: 4px; font-weight: 300;">NEXT GENERATION EXPLOIT</p>
-        <a href="download.html" id="cta-btn">DOWNLOAD NOW</a>
+        <p style="opacity: 0.8; letter-spacing: 4px;">Archive Client Minecraft Hacking</p>
+        <a href="download.html" id="cta-btn">GET STARTED</a>
     </main>
 
-    <section class="contributors-section">
-        <h2 style="font-size: 2.5rem; letter-spacing: 5px;">TEAM MEMBERS</h2>
+    <section class="contributors-section" id="team-area">
+        <h2 style="font-size: 3rem; letter-spacing: 8px; position: relative; z-index: 5;">TEAM MEMBERS</h2>
         <div class="contrib-grid">
             <div class="contrib-card">
-                <div class="img-wrapper">
-                    <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/5592f317c7eb53c8b45066aacf5f88fc.png">
-                    <span class="hover-name" style="background: var(--tag-blue);">@thesmartcat2303</span>
-                </div>
-                <p>THE SMART CAT</p>
+                <div class="img-wrapper"><img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/5592f317c7eb53c8b45066aacf5f88fc.png"></div>
+                <p style="margin-top:15px; font-weight:800;">THE SMART CAT</p>
             </div>
             <div class="contrib-card">
-                <div class="img-wrapper">
-                    <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/ae56fd8615daaae078ad3f86608aa5a3.png">
-                    <span class="hover-name" style="background: var(--tag-red);">@xaibone</span>
-                </div>
-                <p>XAIBO</p>
+                <div class="img-wrapper"><img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/ae56fd8615daaae078ad3f86608aa5a3.png"></div>
+                <p style="margin-top:15px; font-weight:800;">XAIBO</p>
             </div>
             <div class="contrib-card">
-                <div class="img-wrapper">
-                    <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/2bc628b7dca7ab619c2b210b7dee692a.png">
-                    <span class="hover-name" style="background: var(--tag-purple);">@zero__mc</span>
-                </div>
-                <p>THE SMART BUNNY</p>
+                <div class="img-wrapper"><img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/2bc628b7dca7ab619c2b210b7dee692a.png"></div>
+                <p style="margin-top:15px; font-weight:800;">THE SMART BUNNY</p>
             </div>
             <div class="contrib-card">
-                <div class="img-wrapper">
-                    <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/84dadce511ea23b434e11af3e9c362da.png">
-                    <span class="hover-name" style="background: var(--tag-orange);">@toidicakhia</span>
-                </div>
-                <p>TOIDICAKHIA</p>
+                <div class="img-wrapper"><img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/84dadce511ea23b434e11af3e9c362da.png"></div>
+                <p style="margin-top:15px; font-weight:800;">TOIDICAKHIA</p>
             </div>
         </div>
     </section>
 
     <script>
-        const field = document.getElementById('star-field');
-        for (let i = 0; i < 150; i++) {
+        const teamArea = document.getElementById('team-area');
+        for (let i = 0; i < 100; i++) {
             const star = document.createElement('div');
             star.className = 'star';
             const size = Math.random() * 2 + 1;
@@ -228,8 +165,8 @@
             star.style.height = size + 'px';
             star.style.left = Math.random() * 100 + '%';
             star.style.top = Math.random() * 100 + '%';
-            star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
-            field.appendChild(star);
+            star.style.setProperty('--duration', (Math.random() * 3 + 1) + 's');
+            teamArea.appendChild(star);
         }
         const crsr = document.getElementById('cursor');
         document.addEventListener('mousemove', (e) => {
