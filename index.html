@@ -79,7 +79,10 @@
             transition: var(--transition);
         }
 
-        .main-avatar-box:hover img { transform: scale(1.1); }
+        .main-avatar-box:hover img { 
+            transform: scale(1.1); 
+            box-shadow: 0 0 30px var(--main-pink);
+        }
 
         .main-tag {
             position: absolute;
@@ -98,10 +101,7 @@
             border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .main-avatar-box:hover .main-tag { 
-            opacity: 1; 
-            bottom: -15px; 
-        }
+        .main-avatar-box:hover .main-tag { opacity: 1; bottom: -15px; }
 
         #main-title { 
             font-size: clamp(3rem, 10vw, 6rem); 
@@ -162,12 +162,13 @@
             transition: var(--transition);
         }
 
-        .img-wrapper:hover img {
-            transform: translateY(-10px);
-            border-color: var(--white);
-        }
+        .img-wrapper:hover img { transform: translateY(-10px); border-color: var(--white); }
 
-        /* HIỆU ỨNG HIỆN TÊN CHO CONTRIBUTORS */
+        .contrib-card:nth-child(1) .img-wrapper:hover img { box-shadow: 0 0 25px var(--tag-blue); }
+        .contrib-card:nth-child(2) .img-wrapper:hover img { box-shadow: 0 0 25px var(--tag-red); }
+        .contrib-card:nth-child(3) .img-wrapper:hover img { box-shadow: 0 0 25px var(--tag-purple); }
+        .contrib-card:nth-child(4) .img-wrapper:hover img { box-shadow: 0 0 25px var(--tag-orange); }
+
         .hover-name {
             position: absolute;
             top: -30px;
@@ -181,19 +182,11 @@
             white-space: nowrap;
             pointer-events: none;
             z-index: 10;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
-        .img-wrapper:hover .hover-name { 
-            opacity: 1; 
-            top: -45px; 
-        }
+        .img-wrapper:hover .hover-name { opacity: 1; top: -45px; }
 
-        .contrib-card p {
-            font-weight: 800;
-            letter-spacing: 1px;
-            font-size: 0.9rem;
-        }
+        .contrib-card p { font-weight: 800; letter-spacing: 1px; font-size: 0.9rem; }
 
         .cursor {
             position: fixed;
@@ -215,7 +208,7 @@
 
     <main class="hero-section">
         <div class="main-avatar-box">
-            <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/2059e956374eb0ce2173f49214eb53bc.png" alt="MiorisNakashi">
+            <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/2059e956374eb0ce2173f49214eb53bc.png">
             <span class="main-tag">@miorisnakashi</span>
         </div>
         <h1 id="main-title">Archive Client</h1>
