@@ -8,7 +8,7 @@
         :root {
             --white: #ffffff;
             --main-color: #ffb7c5; 
-            --blue-theme: #004080;
+            --blue-theme: #002b5c;
             --transition: all 0.4s ease;
         }
 
@@ -51,6 +51,7 @@
             100% { transform: translateY(110vh); }
         }
 
+        /* PHẦN ĐẦU TRANG */
         .content-wrapper {
             position: relative;
             z-index: 100;
@@ -74,11 +75,9 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .logo-main:hover img {
-            transform: scale(1.1);
-        }
+        .logo-main:hover img { transform: scale(1.1); }
 
-        .hover-tag {
+        .hover-tag-main {
             position: absolute;
             bottom: -25px;
             left: 50%;
@@ -91,19 +90,14 @@
             opacity: 0;
             transition: var(--transition);
             white-space: nowrap;
-            pointer-events: none;
         }
 
-        .logo-main:hover .hover-tag {
-            opacity: 1;
-            bottom: -15px;
-        }
+        .logo-main:hover .hover-tag-main { opacity: 1; bottom: -15px; }
 
         #main-title { 
             font-size: clamp(2.5rem, 8vw, 5.5rem); 
             font-weight: 900; 
             text-transform: uppercase;
-            margin-bottom: 10px;
             text-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
 
@@ -118,18 +112,16 @@
             font-weight: 700;
             transition: var(--transition);
             backdrop-filter: blur(10px);
+            margin-top: 40px;
         }
 
-        #cta-btn:hover { 
-            background: var(--main-color);
-            color: #000;
-            transform: translateY(-5px);
-        }
+        #cta-btn:hover { background: var(--main-color); color: #000; transform: translateY(-5px); }
 
+        /* PHẦN CONTRIBUTORS */
         .contributors-section {
             position: relative;
             z-index: 100;
-            background: #002b5c; 
+            background: var(--blue-theme); 
             padding: 120px 20px;
             text-align: center;
         }
@@ -142,18 +134,49 @@
             margin-top: 50px;
         }
 
-        .contrib-card img {
+        /* CSS ĐẶC BIỆT CHO CON MÈO @THESMARTCAT2303 */
+        .smart-cat-box {
+            position: relative;
+            display: inline-block;
+        }
+
+        .smart-cat-box img {
             width: 110px;
             height: 110px;
             border-radius: 20px;
-            margin-bottom: 15px;
             border: 2px solid rgba(255,255,255,0.1);
             transition: var(--transition);
         }
 
-        .contrib-card:hover img {
+        .smart-cat-box:hover img {
             transform: translateY(-10px);
-            border-color: var(--main-color);
+            border-color: #3498db;
+        }
+
+        .cat-tag {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(52, 152, 219, 0.9);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            opacity: 0;
+            transition: 0.3s;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        .smart-cat-box:hover .cat-tag {
+            opacity: 1;
+            top: -40px;
+        }
+
+        .contrib-card p {
+            margin-top: 15px;
+            font-weight: bold;
         }
 
         .cursor-follower {
@@ -177,31 +200,35 @@
     <main class="content-wrapper">
         <div class="logo-main">
             <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/2059e956374eb0ce2173f49214eb53bc.png" alt="Logo">
-            <span class="hover-tag">@miorisnakashi</span>
+            <span class="hover-tag-main">@miorisnakashi</span>
         </div>
         <h1 id="main-title">Archive Client</h1>
-        <p style="margin-bottom: 40px; opacity: 0.8; letter-spacing: 1px;">Archive Client Minecraft Hacking</p>
         <a href="download.html" id="cta-btn">GET STARTED</a>
     </main>
 
     <section class="contributors-section">
-        <h2 style="font-size: 2.2rem; letter-spacing: 2px;">❤️ CONTRIBUTORS</h2>
+        <h2 style="font-size: 2.2rem;">❤️ CONTRIBUTORS</h2>
         <div class="contrib-grid">
+            
             <div class="contrib-card">
-                <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/5592f317c7eb53c8b45066aacf5f88fc.png">
-                <p style="font-weight: bold;">KAWAII LOLI</p>
+                <div class="smart-cat-box">
+                    <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/5592f317c7eb53c8b45066aacf5f88fc.png">
+                    <span class="cat-tag">@thesmartcat2303</span>
+                </div>
+                <p>THE SMART CAT</p>
             </div>
+
             <div class="contrib-card">
                 <img src="https://via.placeholder.com/110/333/fff?text=LUVSY">
-                <p style="font-weight: bold;">LUVSY</p>
+                <p>LUVSY</p>
             </div>
             <div class="contrib-card">
                 <img src="https://via.placeholder.com/110/222/fff?text=STING">
-                <p style="font-weight: bold;">STING</p>
+                <p>STING</p>
             </div>
             <div class="contrib-card">
                 <img src="https://via.placeholder.com/110/111/fff?text=CYDE">
-                <p style="font-weight: bold;">CYDE</p>
+                <p>CYDE</p>
             </div>
         </div>
     </section>
@@ -227,8 +254,7 @@
 
         window.addEventListener('scroll', () => {
             const scroll = window.scrollY;
-            const bg = document.getElementById('bg');
-            bg.style.opacity = scroll > 400 ? '0.1' : '1';
+            document.getElementById('bg').style.opacity = scroll > 400 ? '0.1' : '1';
         });
     </script>
 </body>
