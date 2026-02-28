@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archive Client | Premium Edition</title>
+    <style>
+        :root {
+            --primary-white: #ffffff;
+            --accent-glow: rgba(255, 255, 255, 0.15);
+            --transition-curve: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            background: #050505;
+            overflow: hidden;
+            color: var(--primary-white);
+        }
+
+        /* Background Optimization */
+        .background-viewport {
+            position: fixed;
+            inset: 0;
+            background: url('Nekoha-Shizuku.png') no-repeat center center;
+            background-size: cover;
+            z-index: 1;
+            transform: scale(1.02); /* Slight scale for smoother edges */
+        }
+
+        /* Main Content Layout */
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding-left: 8vw;
+            background: linear-gradient(to right, rgba(0,0,0,0.4) 0%, transparent 60%);
+            animation: fadeIn 1.5s var(--transition-curve);
+        }
+
+        /* Typography */
+        .title {
+            font-size: clamp(3rem, 10vw, 5.5rem);
+            font-weight: 900;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+            margin-bottom: 0.2rem;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            margin-bottom: 3rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+        }
+
+        /* Expert-Level Button Styling */
+        .action-button {
+            padding: 1.2rem 4.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary-white);
+            text-decoration: none;
+            background: var(--accent-glow);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px; /* Professional square-ish round corners */
+            transition: all 0.4s var(--transition-curve);
+            letter-spacing: 2px;
+        }
+
+        .action-button:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateX(10px);
+            box-shadow: -10px 0 20px rgba(0,0,0,0.2);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            .content-wrapper {
+                align-items: center;
+                padding-left: 0;
+                text-align: center;
+                background: rgba(0,0,0,0.5);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-viewport"></div>
+
+    <main class="content-wrapper">
+        <h1 class="title">Archive Client</h1>
+        <p class="subtitle">Next-Gen Performance</p>
+        <a href="#" class="action-button">GET STARTED</a>
+    </main>
+
+</body>
+</html>
