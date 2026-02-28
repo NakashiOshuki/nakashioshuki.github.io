@@ -8,7 +8,8 @@
         :root {
             --white: #ffffff;
             --main-color: #ffb7c5; 
-            --transition: all 0.4s ease;
+            --glass: rgba(255, 255, 255, 0.1);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
@@ -24,109 +25,143 @@
         .background-viewport {
             position: fixed;
             inset: 0;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
                         url('https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/Nekoha-Shizuku.png') no-repeat center center;
             background-size: cover;
             z-index: 1;
         }
 
-        .snow-container {
+        .top-nav-panel {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 2; pointer-events: none;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 800px;
+            height: 60px;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            z-index: 1000;
         }
 
-        .snowflake {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.6;
-            animation: snow-fall linear infinite;
+        .tab-trigger {
+            padding: 10px 30px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: var(--transition);
         }
 
-        @keyframes snow-fall {
-            0% { transform: translateY(-10vh); }
-            100% { transform: translateY(110vh); }
+        input[type="radio"] { display: none; }
+        
+        .tab-content { 
+            display: none; 
+            opacity: 0; 
+            transform: translateY(20px); 
+            transition: var(--transition); 
         }
 
-        .content-wrapper {
+        #tab1:checked ~ .top-nav-panel label[for="tab1"],
+        #tab2:checked ~ .top-nav-panel label[for="tab2"] {
+            background: var(--main-color);
+            color: #000;
+        }
+
+        #tab1:checked ~ .main-display #content-b26,
+        #tab2:checked ~ .main-display #content-b45 {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .main-display {
             position: relative;
             z-index: 100;
             height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
+            align-items: center;
+        }
+
+        .content-box {
+            flex-direction: column;
             align-items: center;
             text-align: center;
         }
 
-        .logo-box {
-            margin-bottom: 20px;
-        }
-
         .logo-box img {
-            max-width: 100px;
-            height: auto;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            max-width: 140px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
         }
 
-        #download-title { 
-            font-size: 2.2rem; 
-            font-weight: 900; 
+        .version-title {
+            font-size: 3.5rem;
+            font-weight: 900;
             text-transform: uppercase;
             margin-bottom: 25px;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            text-shadow: 0 0 20px rgba(255, 183, 197, 0.4);
         }
 
-        .horizontal-panel {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
-            padding: 25px 50px;
-            width: 85%;
-            max-width: 850px;
+        .dl-group {
             display: flex;
-            justify-content: space-around;
-            align-items: center;
-            gap: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            gap: 20px;
         }
 
-        .dl-btn {
-            flex: 1;
-            padding: 15px 10px;
-            color: var(--white);
-            text-decoration: none;
-            background: rgba(255, 255, 255, 0.05);
+        .btn-dl {
+            padding: 15px 40px;
+            background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            transition: var(--transition);
-        }
-
-        .dl-btn:hover { 
-            background: var(--main-color);
-            color: #000;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(255, 183, 197, 0.3);
-        }
-
-        .back-link {
-            margin-top: 30px;
-            color: var(--white);
+            color: white;
             text-decoration: none;
-            font-size: 0.85rem;
-            opacity: 0.5;
+            border-radius: 12px;
+            font-weight: 700;
             transition: var(--transition);
         }
 
-        .back-link:hover {
-            opacity: 1;
-            color: var(--main-color);
+        .btn-dl:hover {
+            background: var(--white);
+            color: #000;
+            transform: scale(1.05);
+        }
+
+        .snow-container { 
+            position: fixed; 
+            inset: 0; 
+            z-index: 2; 
+            pointer-events: none; 
+        }
+
+        .snowflake { 
+            position: absolute; 
+            background: white; 
+            border-radius: 50%; 
+            opacity: 0.5; 
+            animation: snow-fall linear infinite; 
+        }
+
+        @keyframes snow-fall { 
+            0% { transform: translateY(-10vh); } 
+            100% { transform: translateY(110vh); } 
+        }
+
+        .cursor-follower { 
+            position: fixed; 
+            width: 12px; 
+            height: 12px; 
+            background: white; 
+            border-radius: 50%; 
+            pointer-events: none; 
+            z-index: 9999; 
+            transition: transform 0.1s ease-out; 
+            mix-blend-mode: difference; 
         }
 
         .footer-copyright {
@@ -135,26 +170,8 @@
             left: 50%;
             transform: translateX(-50%);
             z-index: 100;
-            font-size: 0.8rem;
-            opacity: 0.4;
-        }
-
-        .cursor-follower {
-            position: fixed;
-            width: 12px; height: 12px;
-            background: white;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.08s ease-out;
-            mix-blend-mode: difference;
-        }
-
-        @media (max-width: 768px) {
-            .cursor-follower { display: none; }
-            * { cursor: auto; }
-            .horizontal-panel { flex-direction: column; padding: 25px; }
-            .dl-btn { width: 100%; }
+            font-size: 0.85rem;
+            opacity: 0.5;
         }
     </style>
 </head>
@@ -164,29 +181,46 @@
     <div class="background-viewport"></div>
     <div class="snow-container" id="snow-field"></div>
 
-    <main class="content-wrapper">
-        <div class="logo-box">
-            <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/logo.png" alt="Logo">
+    <input type="radio" name="tabs" id="tab1" checked>
+    <input type="radio" name="tabs" id="tab2">
+
+    <nav class="top-nav-panel">
+        <label for="tab1" class="tab-trigger">VERSION B2.6</label>
+        <label for="tab2" class="tab-trigger">VERSION B4.5</label>
+        <a href="index.html" style="text-decoration: none; color: white; font-size: 0.8rem; margin-left: 20px; opacity: 0.5;">BACK</a>
+    </nav>
+
+    <main class="main-display">
+        <div class="content-box tab-content" id="content-b26">
+            <div class="logo-box">
+                <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/logo.png" alt="Logo">
+            </div>
+            <h1 class="version-title">AUGUSTUS B2.6</h1>
+            <div class="dl-group">
+                <a href="#" class="btn-dl">DOWNLOAD .EXE</a>
+                <a href="#" class="btn-dl">DOWNLOAD .JAR</a>
+            </div>
         </div>
 
-        <h1 id="download-title">Augustus Downloads</h1>
-        
-        <div class="horizontal-panel">
-            <a href="#" class="dl-btn">WINDOWS (.EXE)</a>
-            <a href="#" class="dl-btn">UNIVERSAL (.JAR)</a>
-            <a href="#" class="dl-btn">CHANGELOG</a>
+        <div class="content-box tab-content" id="content-b45">
+            <div class="logo-box">
+                <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/logo.png" alt="Logo">
+            </div>
+            <h1 class="version-title">AUGUSTUS B4.5</h1>
+            <div class="dl-group">
+                <a href="#" class="btn-dl">DOWNLOAD .EXE</a>
+                <a href="#" class="btn-dl">DOWNLOAD .JAR</a>
+            </div>
         </div>
-
-        <a href="index.html" class="back-link">← Return to Home</a>
-
-        <footer class="footer-copyright">
-            Copyright © 2026 AugustusUI
-        </footer>
     </main>
+
+    <footer class="footer-copyright">
+        Copyright © 2026 AugustusUI
+    </footer>
 
     <script>
         const field = document.getElementById('snow-field');
-        for (let i = 0; i < 60; i++) {
+        for (let i = 0; i < 50; i++) {
             const snow = document.createElement('div');
             snow.className = 'snowflake';
             const size = Math.random() * 3 + 2;
@@ -197,7 +231,6 @@
             snow.style.animationDelay = Math.random() * 5 + 's';
             field.appendChild(snow);
         }
-
         const flw = document.getElementById('follower');
         document.addEventListener('mousemove', (e) => {
             flw.style.transform = `translate(${e.clientX - 6}px, ${e.clientY - 6}px)`;
