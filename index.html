@@ -12,6 +12,7 @@
     --dark-blue: #002b5c;
 
     --tag-blue: #3498db;
+    --tag-red: #e74c3c;
     --tag-purple: #9b59b6;
     --tag-orange: #f39c12;
     --tag-yellow: #f1c40f;
@@ -30,25 +31,17 @@ body, html {
     cursor: none;
 }
 
-/* VIDEO BACKGROUND */
+/* ===== VIDEO BACKGROUND ===== */
 #bgVideo {
     position: fixed;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: 0;
+    z-index: -1; /* quan trọng để không che text */
 }
 
-/* FALLBACK IMAGE */
-#bgFallback {
-    position: fixed;
-    inset: 0;
-    background: url("https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/Nekoha-Shizuku.png") center/cover no-repeat;
-    z-index: -1;
-}
-
-/* CURSOR */
+/* CUSTOM CURSOR */
 .cursor {
     position: fixed;
     width: 12px;
@@ -84,55 +77,66 @@ body, html {
 /* HERO */
 .hero-section {
     position: relative;
-    z-index: 100;
+    z-index: 10;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
+}
+
+#main-title {
+    font-size: clamp(3rem, 10vw, 6rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 12px;
+}
+
+#cta-btn {
+    margin-top: 40px;
+    padding: 18px 60px;
+    border-radius: 50px;
+    font-weight: 800;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    letter-spacing: 2px;
+    text-decoration: none;
+    color: white;
 }
 
 /* TEAM */
 .contributors-section {
     position: relative;
-    z-index: 100;
+    z-index: 10;
     background: radial-gradient(circle at center, #001d3d 0%, #000814 100%);
     padding: 120px 20px;
+    text-align: center;
 }
 </style>
 </head>
 
 <body>
 
-<div id="bgFallback"></div>
-
-<video id="bgVideo"
-autoplay
-muted
-loop
-playsinline
-poster="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/Nekoha-Shizuku.png">
-<source src="https://nakashioshuki.github.io/background/1.mp4" type="video/mp4">
+<!-- VIDEO BACKGROUND -->
+<video id="bgVideo" autoplay muted loop playsinline>
+    <source src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/background/1.mp4" type="video/mp4">
 </video>
 
 <div class="cursor" id="cursor"></div>
 <div class="snow-container" id="snow-field"></div>
 
-<!-- GIỮ NGUYÊN PHẦN HERO + TEAM CỦA BẠN Ở ĐÂY -->
+<main class="hero-section">
+    <h1 id="main-title">Archive Client</h1>
+    <a href="download.html" id="cta-btn">DOWNLOAD NOW</a>
+</main>
+
+<section class="contributors-section">
+    <h2 style="font-size:2.5rem;letter-spacing:5px;">TEAM MEMBERS</h2>
+</section>
 
 <script>
-const video = document.getElementById("bgVideo");
-
-// Nếu video load thành công → ẩn fallback
-video.addEventListener("canplay", () => {
-    document.getElementById("bgFallback").style.display = "none";
-});
-
-// Nếu video lỗi → ẩn video, giữ fallback
-video.addEventListener("error", () => {
-    video.style.display = "none";
-});
-
 /* Snow */
 const field = document.getElementById('snow-field');
 for (let i = 0; i < 60; i++) {
