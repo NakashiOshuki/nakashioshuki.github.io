@@ -7,13 +7,16 @@
     <style>
         :root {
             --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.05);
+            /* Màu viền kính */
+            --border: rgba(255, 255, 255, 0.1); 
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
 
         body, html {
-            min-height: 160vh;
+            min-height: 150vh;
             font-family: -apple-system, system-ui, sans-serif;
             background: #0a0a0a;
             color: var(--white);
@@ -24,7 +27,7 @@
         .background-viewport {
             position: fixed;
             inset: 0;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('Nekoha-Shizuku.png') no-repeat center center;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('Nekoha-Shizuku.png') no-repeat center center;
             background-size: cover;
             z-index: 1;
         }
@@ -50,98 +53,103 @@
             position: absolute;
             background: white;
             border-radius: 50%;
-            opacity: 0.8;
-            filter: blur(1.5px);
-            animation: snow-fall linear infinite, snow-shake ease-in-out infinite;
+            opacity: 0.5;
+            animation: fall linear infinite;
         }
 
-        @keyframes snow-fall {
-            0% { top: -10%; }
-            100% { top: 110%; }
-        }
-
-        @keyframes snow-shake {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(35px); }
-        }
+        @keyframes fall { to { transform: translateY(105vh); } }
 
         .content-wrapper {
             position: relative;
             z-index: 10;
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 100px 20px;
         }
 
-        .text-content-only {
+        .glass-container {
+            background: var(--glass);
+            /* Hiệu ứng làm mờ nền phía sau hộp */
+            backdrop-filter: blur(25px); 
+            -webkit-backdrop-filter: blur(25px);
+            /* Viền hộp */
+            border: 1px solid var(--border); 
+            border-radius: 40px;
+            padding: 80px 60px;
             text-align: center;
-            max-width: 800px;
-            width: 95%;
-            animation: pushUp 1.3s var(--transition) forwards; 
+            max-width: 700px;
+            width: 90%;
+            /* Đổ bóng hộp để tạo chiều sâu */
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4); 
+            position: relative; 
         }
 
-        @keyframes pushUp {
-            0% { opacity: 0; transform: translateY(100px); }
-            100% { opacity: 1; transform: translateY(0); }
+        /* --- Thêm lớp phủ mờ ở viền hộp --- */
+        .glass-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 40px;
+            /* Tạo viền mờ màu trắng */
+            border: 2px solid rgba(255, 255, 255, 0.1); 
+            /* Hiệu ứng làm mờ cho chính viền hộp */
+            filter: blur(5px); 
+            z-index: -1; 
         }
+        /* ------------------------------------- */
 
         #main-title { 
-            font-size: clamp(2.8rem, 8vw, 5.5rem); 
+            font-size: clamp(2.5rem, 7vw, 5rem); 
             font-weight: 800; 
             text-transform: uppercase; 
-            line-height: 1; 
+            line-height: 1.1; 
             margin-bottom: 20px;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            color: var(--white);
         }
 
         #sub-title { 
-            font-size: 1.25rem; 
-            letter-spacing: 1.5px;
+            font-size: 1.2rem; 
+            letter-spacing: 1px;
             opacity: 0.9;
-            margin-bottom: 60px;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.6);
+            margin-bottom: 50px;
+            color: var(--white);
         }
         
         #cta-btn {
             display: inline-block;
-            padding: 20px 70px;
+            padding: 18px 65px;
             color: var(--white);
             text-decoration: none;
-            background: rgba(255, 255, 255, 0.12);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            border-radius: 25px;
-            font-weight: 700;
-            letter-spacing: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            font-weight: 600;
+            letter-spacing: 2px;
             transition: var(--transition);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
         }
 
         #cta-btn:hover { 
-            background: rgba(255, 255, 255, 0.25); 
-            transform: scale(1.05) translateY(-5px); 
+            background: rgba(255, 255, 255, 0.2); 
+            transform: translateY(-3px); 
             border-color: var(--white); 
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-        }
-
-        .footer-spacer {
-            height: 50vh;
         }
 
         .footer-copyright {
             position: relative;
-            padding-bottom: 30px;
+            padding: 50px 0;
             text-align: center;
             z-index: 10;
             font-size: 0.9rem;
-            opacity: 0.5;
-            letter-spacing: 1px;
+            opacity: 0.6;
         }
 
         @media (max-width: 768px) {
+            .glass-container { padding: 40px 20px; }
             .cursor-follower { display: none; }
             * { cursor: auto; }
         }
@@ -154,14 +162,13 @@
     <div class="snow-container" id="snow-field"></div>
 
     <main class="content-wrapper">
-        <div class="text-content-only">
+        <div class="glass-container">
             <h1 id="main-title"></h1>
             <p id="sub-title"></p>
             <a href="#" id="cta-btn"></a>
         </div>
     </main>
 
-    <div class="footer-spacer"></div>
     <footer class="footer-copyright" id="footer-text"></footer>
 
     <script>
@@ -177,18 +184,15 @@
         document.getElementById('cta-btn').textContent = DATA.b;
         document.getElementById('footer-text').textContent = DATA.f;
 
-        const field = document.getElementById('snow-field');
-        for (let i = 0; i < 100; i++) {
-            const snow = document.createElement('div');
-            snow.className = 'snowflake';
-            const size = Math.random() * 5 + 2;
-            snow.style.width = size + 'px';
-            snow.style.height = size + 'px';
-            snow.style.left = Math.random() * 100 + '%';
-            snow.style.opacity = Math.random() * 0.7 + 0.3;
-            snow.style.animationDuration = (Math.random() * 4 + 4) + 's', (Math.random() * 3 + 2) + 's';
-            snow.style.animationDelay = Math.random() * 5 + 's';
-            field.appendChild(snow);
+        const sc = document.getElementById('snow-field');
+        for (let i = 0; i < 60; i++) {
+            const f = document.createElement('div');
+            f.className = 'snowflake';
+            f.style.left = Math.random() * 100 + '%';
+            f.style.width = f.style.height = (Math.random() * 3 + 2) + 'px';
+            f.style.animationDuration = (Math.random() * 8 + 6) + 's';
+            f.style.animationDelay = Math.random() * 5 + 's';
+            sc.appendChild(f);
         }
 
         const flw = document.getElementById('follower');
