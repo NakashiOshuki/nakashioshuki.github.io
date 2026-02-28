@@ -6,8 +6,9 @@
     <title>Archive | Premium Edition</title>
     <style>
         :root {
-            --primary-white: #ffffff;
-            --accent-glow: rgba(255, 255, 255, 0.15);
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -17,7 +18,7 @@
             min-height: 150vh;
             font-family: -apple-system, system-ui, sans-serif;
             background: #0a0a0a;
-            color: var(--primary-white);
+            color: var(--white);
             overflow-x: hidden;
             overflow-y: auto;
         }
@@ -68,14 +69,14 @@
         }
 
         .glass-container {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--glass);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border);
             border-radius: 40px;
-            padding: 80px 100px;
+            padding: 80px 60px;
             text-align: center;
-            max-width: 800px;
+            max-width: 700px;
             width: 90%;
             box-shadow: 0 25px 50px rgba(0,0,0,0.4);
         }
@@ -84,21 +85,23 @@
             font-size: clamp(2.5rem, 7vw, 5rem); 
             font-weight: 800; 
             text-transform: uppercase; 
-            line-height: 1; 
-            margin-bottom: 15px; 
+            line-height: 1.1; 
+            margin-bottom: 20px;
+            color: var(--white);
         }
 
         #sub-title { 
-            font-size: 1.1rem; 
-            letter-spacing: 2px;
-            opacity: 0.8;
-            margin-bottom: 50px; 
+            font-size: 1.2rem; 
+            letter-spacing: 1px;
+            opacity: 0.9;
+            margin-bottom: 50px;
+            color: var(--white);
         }
         
         #cta-btn {
             display: inline-block;
             padding: 18px 65px;
-            color: white;
+            color: var(--white);
             text-decoration: none;
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -108,7 +111,7 @@
             transition: var(--transition);
         }
 
-        #cta-btn:hover { background: rgba(255, 255, 255, 0.2); transform: translateY(-5px); border-color: white; }
+        #cta-btn:hover { background: rgba(255, 255, 255, 0.2); transform: translateY(-3px); border-color: var(--white); }
 
         .footer-copyright {
             position: relative;
@@ -116,12 +119,11 @@
             text-align: center;
             z-index: 10;
             font-size: 0.9rem;
-            opacity: 0.5;
-            letter-spacing: 1px;
+            opacity: 0.6;
         }
 
         @media (max-width: 768px) {
-            .glass-container { padding: 50px 30px; }
+            .glass-container { padding: 40px 20px; }
             .cursor-follower { display: none; }
             * { cursor: auto; }
         }
@@ -135,8 +137,8 @@
 
     <main class="content-wrapper">
         <div class="glass-container">
-            <div id="main-title"></div>
-            <div id="sub-title"></div>
+            <h1 id="main-title"></h1>
+            <p id="sub-title"></p>
             <a href="#" id="cta-btn"></a>
         </div>
     </main>
@@ -144,20 +146,33 @@
     <footer class="footer-copyright" id="footer-text"></footer>
 
     <script>
-        const UI_TEXT = {
-            title: "Archive Client",
-            subtitle: "Archive Client Minecraft Hacking",
-            button: "GET STARTED",
-            footer: "Copyright © 2026 ArchiveUI"
+        const DATA = {
+            t: "Archive Client",
+            s: "Archive Client Minecraft Hacking",
+            b: "GET STARTED",
+            f: "Copyright © 2026 ArchiveUI"
         };
 
-        document.getElementById('main-title').innerText = UI_TEXT.title;
-        document.getElementById('sub-title').innerText = UI_TEXT.subtitle;
-        document.getElementById('cta-btn').innerText = UI_TEXT.button;
-        document.getElementById('footer-text').innerText = UI_TEXT.footer;
+        document.getElementById('main-title').textContent = DATA.t;
+        document.getElementById('sub-title').textContent = DATA.s;
+        document.getElementById('cta-btn').textContent = DATA.b;
+        document.getElementById('footer-text').textContent = DATA.f;
 
-        const snow = document.getElementById('snow-field');
+        const sc = document.getElementById('snow-field');
         for (let i = 0; i < 60; i++) {
             const f = document.createElement('div');
             f.className = 'snowflake';
-            f
+            f.style.left = Math.random() * 100 + '%';
+            f.style.width = f.style.height = (Math.random() * 3 + 2) + 'px';
+            f.style.animationDuration = (Math.random() * 8 + 6) + 's';
+            f.style.animationDelay = Math.random() * 5 + 's';
+            sc.appendChild(f);
+        }
+
+        const flw = document.getElementById('follower');
+        document.addEventListener('mousemove', (e) => {
+            flw.style.transform = `translate(${e.clientX - 7.5}px, ${e.clientY - 7.5}px)`;
+        });
+    </script>
+</body>
+</html>
