@@ -9,7 +9,7 @@
             --white: #ffffff;
             --main-color: #ffb7c5; 
             --glass: rgba(255, 255, 255, 0.1);
-            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: all 0.3s ease;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
@@ -31,148 +31,115 @@
             z-index: 1;
         }
 
-        .top-nav-panel {
+        .sidebar {
             position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 800px;
-            height: 60px;
-            background: var(--glass);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
+            left: 50px;
+            top: 50%;
+            transform: translateY(-50%);
             display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            flex-direction: column;
+            gap: 20px;
             z-index: 1000;
         }
 
-        .tab-trigger {
-            padding: 10px 30px;
-            border-radius: 10px;
-            font-weight: 700;
+        .version-card {
+            width: 120px;
+            height: 80px;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
             font-size: 0.9rem;
             transition: var(--transition);
+            text-align: center;
+            padding: 10px;
         }
 
         input[type="radio"] { display: none; }
-        
-        .tab-content { 
-            display: none; 
-            opacity: 0; 
-            transform: translateY(20px); 
-            transition: var(--transition); 
-        }
 
-        #tab1:checked ~ .top-nav-panel label[for="tab1"],
-        #tab2:checked ~ .top-nav-panel label[for="tab2"] {
-            background: var(--main-color);
-            color: #000;
-        }
-
-        #tab1:checked ~ .main-display #content-b26,
-        #tab2:checked ~ .main-display #content-b45 {
-            display: flex;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .main-display {
-            position: relative;
-            z-index: 100;
+        .tab-content {
+            display: none;
+            position: fixed;
+            left: 250px;
+            right: 50px;
+            top: 0;
             height: 100vh;
-            display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
+            z-index: 100;
+            animation: slideIn 0.5s ease;
         }
 
-        .content-box {
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
+        #v1:checked ~ .sidebar label[for="v1"] .version-card,
+        #v2:checked ~ .sidebar label[for="v2"] .version-card,
+        #v3:checked ~ .sidebar label[for="v3"] .version-card {
+            background: var(--main-color);
+            color: #000;
+            transform: scale(1.1) translateX(10px);
+            box-shadow: 0 0 20px var(--main-color);
         }
 
-        .logo-box img {
-            max-width: 140px;
+        #v1:checked ~ #content-v1,
+        #v2:checked ~ #content-v2,
+        #v3:checked ~ #content-v3 {
+            display: flex;
+        }
+
+        .logo-display {
+            max-width: 150px;
             border-radius: 20px;
             margin-bottom: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
 
-        .version-title {
-            font-size: 3.5rem;
+        .title-display {
+            font-size: 3rem;
             font-weight: 900;
-            text-transform: uppercase;
-            margin-bottom: 25px;
-            text-shadow: 0 0 20px rgba(255, 183, 197, 0.4);
+            margin-bottom: 30px;
+            text-shadow: 0 0 15px rgba(255, 183, 197, 0.5);
         }
 
-        .dl-group {
-            display: flex;
-            gap: 20px;
-        }
-
-        .btn-dl {
+        .dl-btn {
             padding: 15px 40px;
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: white;
             text-decoration: none;
-            border-radius: 12px;
+            border-radius: 10px;
             font-weight: 700;
             transition: var(--transition);
         }
 
-        .btn-dl:hover {
+        .dl-btn:hover {
             background: var(--white);
             color: #000;
-            transform: scale(1.05);
         }
 
-        .snow-container { 
-            position: fixed; 
-            inset: 0; 
-            z-index: 2; 
-            pointer-events: none; 
-        }
-
-        .snowflake { 
-            position: absolute; 
-            background: white; 
-            border-radius: 50%; 
-            opacity: 0.5; 
-            animation: snow-fall linear infinite; 
-        }
-
-        @keyframes snow-fall { 
-            0% { transform: translateY(-10vh); } 
-            100% { transform: translateY(110vh); } 
-        }
-
-        .cursor-follower { 
-            position: fixed; 
-            width: 12px; 
-            height: 12px; 
-            background: white; 
-            border-radius: 50%; 
-            pointer-events: none; 
-            z-index: 9999; 
-            transition: transform 0.1s ease-out; 
-            mix-blend-mode: difference; 
-        }
-
-        .footer-copyright {
-            position: absolute;
+        .back-home {
+            position: fixed;
             bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 100;
-            font-size: 0.85rem;
+            right: 30px;
+            text-decoration: none;
+            color: white;
             opacity: 0.5;
+            font-size: 0.8rem;
+            z-index: 1000;
         }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .snow-container { position: fixed; inset: 0; z-index: 2; pointer-events: none; }
+        .snowflake { position: absolute; background: white; border-radius: 50%; opacity: 0.5; animation: snow-fall linear infinite; }
+        @keyframes snow-fall { 0% { transform: translateY(-10vh); } 100% { transform: translateY(110vh); } }
+        .cursor-follower { position: fixed; width: 12px; height: 12px; background: white; border-radius: 50%; pointer-events: none; z-index: 9999; transition: transform 0.1s ease-out; mix-blend-mode: difference; }
     </style>
 </head>
 <body>
@@ -181,42 +148,35 @@
     <div class="background-viewport"></div>
     <div class="snow-container" id="snow-field"></div>
 
-    <input type="radio" name="tabs" id="tab1" checked>
-    <input type="radio" name="tabs" id="tab2">
+    <input type="radio" name="vers" id="v1" checked>
+    <input type="radio" name="vers" id="v2">
+    <input type="radio" name="vers" id="v3">
 
-    <nav class="top-nav-panel">
-        <label for="tab1" class="tab-trigger">VERSION B2.6</label>
-        <label for="tab2" class="tab-trigger">VERSION B4.5</label>
-        <a href="index.html" style="text-decoration: none; color: white; font-size: 0.8rem; margin-left: 20px; opacity: 0.5;">BACK</a>
-    </nav>
+    <div class="sidebar">
+        <label for="v1"><div class="version-card">B2.6</div></label>
+        <label for="v2"><div class="version-card">B4.5</div></label>
+        <label for="v3"><div class="version-card">B5.0</div></label>
+    </div>
 
-    <main class="main-display">
-        <div class="content-box tab-content" id="content-b26">
-            <div class="logo-box">
-                <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/logo.png" alt="Logo">
-            </div>
-            <h1 class="version-title">AUGUSTUS B2.6</h1>
-            <div class="dl-group">
-                <a href="#" class="btn-dl">DOWNLOAD .EXE</a>
-                <a href="#" class="btn-dl">DOWNLOAD .JAR</a>
-            </div>
-        </div>
+    <div class="tab-content" id="content-v1">
+        <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/logo.png" class="logo-display">
+        <h1 class="title-display">AUGUSTUS B2.6</h1>
+        <a href="#" class="dl-btn">DOWNLOAD NOW</a>
+    </div>
 
-        <div class="content-box tab-content" id="content-b45">
-            <div class="logo-box">
-                <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/logo.png" alt="Logo">
-            </div>
-            <h1 class="version-title">AUGUSTUS B4.5</h1>
-            <div class="dl-group">
-                <a href="#" class="btn-dl">DOWNLOAD .EXE</a>
-                <a href="#" class="btn-dl">DOWNLOAD .JAR</a>
-            </div>
-        </div>
-    </main>
+    <div class="tab-content" id="content-v2">
+        <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/logo.png" class="logo-display">
+        <h1 class="title-display">AUGUSTUS B4.5</h1>
+        <a href="#" class="dl-btn">DOWNLOAD NOW</a>
+    </div>
 
-    <footer class="footer-copyright">
-        Copyright © 2026 AugustusUI
-    </footer>
+    <div class="tab-content" id="content-v3">
+        <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/logo.png" class="logo-display">
+        <h1 class="title-display">AUGUSTUS B5.0</h1>
+        <a href="#" class="dl-btn">DOWNLOAD NOW</a>
+    </div>
+
+    <a href="index.html" class="back-home">back to menu</a>
 
     <script>
         const field = document.getElementById('snow-field');
