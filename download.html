@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Augustus | Premium Edition</title>
+    <title>Download | Augustus Client</title>
     <style>
         :root {
             --white: #ffffff;
@@ -24,7 +24,7 @@
         .background-viewport {
             position: fixed;
             inset: 0;
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
                         url('https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/Nekoha-Shizuku.png') no-repeat center center;
             background-size: cover;
             z-index: 1;
@@ -61,77 +61,82 @@
         }
 
         .logo-box {
-            margin-bottom: 25px;
-            animation: fadeIn 1.5s ease;
+            margin-bottom: 20px;
         }
 
         .logo-box img {
-            max-width: 130px;
+            max-width: 100px;
             height: auto;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
         }
 
-        #main-title { 
-            font-size: clamp(2.5rem, 8vw, 5rem); 
-            font-weight: 800; 
+        #download-title { 
+            font-size: 2.2rem; 
+            font-weight: 900; 
             text-transform: uppercase;
-            margin-bottom: 10px;
-            text-shadow: 0 5px 20px rgba(0,0,0,0.7);
-            transition: var(--transition);
+            margin-bottom: 25px;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
 
-        #main-title:hover {
-            transform: scale(1.05);
-            color: var(--main-color);
-            text-shadow: 0 0 20px var(--main-color);
-            letter-spacing: 5px;
+        .horizontal-panel {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 25px 50px;
+            width: 85%;
+            max-width: 850px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
-        #sub-title { 
-            font-size: 1.1rem; 
-            opacity: 0.8;
-            margin-bottom: 40px;
-            letter-spacing: 2px;
-            transition: var(--transition);
-        }
-
-        #sub-title:hover {
-            color: var(--main-color);
-            letter-spacing: 4px;
-        }
-        
-        #cta-btn {
-            display: inline-block;
-            padding: 18px 60px;
+        .dl-btn {
+            flex: 1;
+            padding: 15px 10px;
             color: var(--white);
             text-decoration: none;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
             font-weight: 700;
-            letter-spacing: 2px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
             transition: var(--transition);
-            backdrop-filter: blur(10px);
         }
 
-        #cta-btn:hover { 
+        .dl-btn:hover { 
             background: var(--main-color);
             color: #000;
-            transform: scale(1.05);
-            border-color: transparent;
-            box-shadow: 0 0 30px var(--main-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 183, 197, 0.3);
+        }
+
+        .back-link {
+            margin-top: 30px;
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.85rem;
+            opacity: 0.5;
+            transition: var(--transition);
+        }
+
+        .back-link:hover {
+            opacity: 1;
+            color: var(--main-color);
         }
 
         .footer-copyright {
             position: absolute;
-            bottom: 40px;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 100;
-            font-size: 0.85rem;
-            opacity: 0.5;
-            letter-spacing: 1px;
+            font-size: 0.8rem;
+            opacity: 0.4;
         }
 
         .cursor-follower {
@@ -145,14 +150,11 @@
             mix-blend-mode: difference;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         @media (max-width: 768px) {
             .cursor-follower { display: none; }
             * { cursor: auto; }
+            .horizontal-panel { flex-direction: column; padding: 25px; }
+            .dl-btn { width: 100%; }
         }
     </style>
 </head>
@@ -167,9 +169,15 @@
             <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/logo.png" alt="Logo">
         </div>
 
-        <h1 id="main-title">Augustus Client</h1>
-        <p id="sub-title">Augustus Client Minecraft Hacking</p>
-        <a href="download.html" id="cta-btn">GET STARTED</a>
+        <h1 id="download-title">Augustus Downloads</h1>
+        
+        <div class="horizontal-panel">
+            <a href="#" class="dl-btn">WINDOWS (.EXE)</a>
+            <a href="#" class="dl-btn">UNIVERSAL (.JAR)</a>
+            <a href="#" class="dl-btn">CHANGELOG</a>
+        </div>
+
+        <a href="index.html" class="back-link">← Return to Home</a>
 
         <footer class="footer-copyright">
             Copyright © 2026 AugustusUI
@@ -178,7 +186,7 @@
 
     <script>
         const field = document.getElementById('snow-field');
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < 60; i++) {
             const snow = document.createElement('div');
             snow.className = 'snowflake';
             const size = Math.random() * 3 + 2;
