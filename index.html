@@ -8,7 +8,7 @@
         :root {
             --white: #ffffff;
             --main-color: #ffb7c5; 
-            --blue-theme: #3498db;
+            --blue-theme: #004080;
             --transition: all 0.4s ease;
         }
 
@@ -29,7 +29,7 @@
                         url('https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/Nekoha-Shizuku.png') no-repeat center center;
             background-size: cover;
             z-index: 1;
-            transition: opacity 0.6s ease;
+            transition: opacity 0.5s ease;
         }
 
         .snow-container {
@@ -62,38 +62,41 @@
             text-align: center;
         }
 
-        .logo-container {
+        .logo-main {
             position: relative;
             margin-bottom: 25px;
         }
 
-        .logo-container img {
+        .logo-main img {
             width: 140px;
-            border-radius: 30px;
+            border-radius: 25px;
             transition: var(--transition);
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .logo-container:hover img {
+        .logo-main:hover img {
             transform: scale(1.1);
         }
 
         .hover-tag {
             position: absolute;
-            bottom: -20px;
+            bottom: -25px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 0.75rem;
-            color: var(--main-color);
+            font-size: 0.85rem;
+            color: var(--white);
+            background: rgba(0, 0, 0, 0.6);
+            padding: 4px 12px;
+            border-radius: 8px;
             opacity: 0;
             transition: var(--transition);
             white-space: nowrap;
-            letter-spacing: 1px;
+            pointer-events: none;
         }
 
-        .logo-container:hover .hover-tag {
+        .logo-main:hover .hover-tag {
             opacity: 1;
-            bottom: -10px;
+            bottom: -15px;
         }
 
         #main-title { 
@@ -102,7 +105,6 @@
             text-transform: uppercase;
             margin-bottom: 10px;
             text-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            transition: var(--transition);
         }
 
         #cta-btn {
@@ -114,7 +116,6 @@
             border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 12px;
             font-weight: 700;
-            letter-spacing: 2px;
             transition: var(--transition);
             backdrop-filter: blur(10px);
         }
@@ -128,55 +129,31 @@
         .contributors-section {
             position: relative;
             z-index: 100;
-            min-height: 100vh;
-            background: #001f3f; 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 50px;
-        }
-
-        .pixel-header {
-            font-size: 2.5rem;
-            margin-bottom: 60px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
+            background: #002b5c; 
+            padding: 120px 20px;
+            text-align: center;
         }
 
         .contrib-grid {
             display: flex;
-            gap: 40px;
-            flex-wrap: wrap;
             justify-content: center;
-        }
-
-        .contrib-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
+            gap: 45px;
+            flex-wrap: wrap;
+            margin-top: 50px;
         }
 
         .contrib-card img {
-            width: 120px;
-            height: 120px;
+            width: 110px;
+            height: 110px;
             border-radius: 20px;
-            border: 3px solid rgba(255,255,255,0.1);
+            margin-bottom: 15px;
+            border: 2px solid rgba(255,255,255,0.1);
             transition: var(--transition);
         }
 
         .contrib-card:hover img {
-            transform: translateY(-15px);
-            border-color: var(--blue-theme);
-            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.4);
-        }
-
-        .contrib-card p {
-            font-weight: 800;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
+            transform: translateY(-10px);
+            border-color: var(--main-color);
         }
 
         .cursor-follower {
@@ -194,40 +171,39 @@
 <body>
 
     <div class="cursor-follower" id="follower"></div>
-    <div class="background-viewport" id="bg-view"></div>
+    <div class="background-viewport" id="bg"></div>
     <div class="snow-container" id="snow-field"></div>
 
     <main class="content-wrapper">
-        <div class="logo-container">
-            <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/5592f317c7eb53c8b45066aacf5f88fc.png" alt="Logo">
-            <span class="hover-tag">@thesmartcat2303</span>
+        <div class="logo-main">
+            <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/2059e956374eb0ce2173f49214eb53bc.png" alt="Logo">
+            <span class="hover-tag">@miorisnakashi</span>
         </div>
         <h1 id="main-title">Archive Client</h1>
-        <p id="sub-title" style="margin-bottom: 40px; opacity: 0.8;">Archive Client Minecraft Hacking</p>
+        <p style="margin-bottom: 40px; opacity: 0.8; letter-spacing: 1px;">Archive Client Minecraft Hacking</p>
         <a href="download.html" id="cta-btn">GET STARTED</a>
     </main>
 
     <section class="contributors-section">
-        <h2 class="pixel-header">❤️ CONTRIBUTORS</h2>
+        <h2 style="font-size: 2.2rem; letter-spacing: 2px;">❤️ CONTRIBUTORS</h2>
         <div class="contrib-grid">
             <div class="contrib-card">
-                <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/5592f317c7eb53c8b45066aacf5f88fc.png" alt="K">
-                <p>KAWAII LOLI</p>
+                <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/5592f317c7eb53c8b45066aacf5f88fc.png">
+                <p style="font-weight: bold;">KAWAII LOLI</p>
             </div>
             <div class="contrib-card">
-                <img src="https://via.placeholder.com/120/555/fff?text=LUVSY" alt="L">
-                <p>LUVSY</p>
+                <img src="https://via.placeholder.com/110/333/fff?text=LUVSY">
+                <p style="font-weight: bold;">LUVSY</p>
             </div>
             <div class="contrib-card">
-                <img src="https://via.placeholder.com/120/111/fff?text=STING" alt="S">
-                <p>STING</p>
+                <img src="https://via.placeholder.com/110/222/fff?text=STING">
+                <p style="font-weight: bold;">STING</p>
             </div>
             <div class="contrib-card">
-                <img src="https://via.placeholder.com/120/333/fff?text=CYDE" alt="C">
-                <p>CYDE</p>
+                <img src="https://via.placeholder.com/110/111/fff?text=CYDE">
+                <p style="font-weight: bold;">CYDE</p>
             </div>
         </div>
-        <p style="margin-top: 80px; opacity: 0.3; font-size: 0.8rem;">Copyright © 2026 ArchiveUI</p>
     </section>
 
     <script>
@@ -248,3 +224,12 @@
         document.addEventListener('mousemove', (e) => {
             flw.style.transform = `translate(${e.clientX - 6}px, ${e.clientY - 6}px)`;
         });
+
+        window.addEventListener('scroll', () => {
+            const scroll = window.scrollY;
+            const bg = document.getElementById('bg');
+            bg.style.opacity = scroll > 400 ? '0.1' : '1';
+        });
+    </script>
+</body>
+</html>
