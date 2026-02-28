@@ -7,9 +7,13 @@
     <style>
         :root {
             --white: #ffffff;
-            --main-color: #ffb7c5; 
-            --blue-theme: #002b5c;
-            --transition: all 0.4s ease;
+            --main-pink: #ffb7c5; 
+            --dark-blue: #002b5c;
+            --tag-blue: #3498db;
+            --tag-red: #e74c3c;
+            --tag-purple: #9b59b6;
+            --tag-orange: #f39c12;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
@@ -29,13 +33,14 @@
                         url('https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/Nekoha-Shizuku.png') no-repeat center center;
             background-size: cover;
             z-index: 1;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.6s ease;
         }
 
         .snow-container {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 2; pointer-events: none;
+            inset: 0;
+            z-index: 2;
+            pointer-events: none;
         }
 
         .snowflake {
@@ -51,8 +56,7 @@
             100% { transform: translateY(110vh); }
         }
 
-        /* PHẦN ĐẦU TRANG */
-        .content-wrapper {
+        .hero-section {
             position: relative;
             z-index: 100;
             height: 100vh;
@@ -63,65 +67,64 @@
             text-align: center;
         }
 
-        .logo-main {
+        .main-avatar-box {
             position: relative;
             margin-bottom: 25px;
         }
 
-        .logo-main img {
-            width: 140px;
-            border-radius: 25px;
+        .main-avatar-box img {
+            width: 150px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
             transition: var(--transition);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .logo-main:hover img { transform: scale(1.1); }
+        .main-avatar-box:hover img { transform: scale(1.1); }
 
-        .hover-tag-main {
+        .main-tag {
             position: absolute;
-            bottom: -25px;
+            bottom: -20px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 0.85rem;
-            color: var(--white);
-            background: rgba(0, 0, 0, 0.6);
-            padding: 4px 12px;
-            border-radius: 8px;
+            background: rgba(0,0,0,0.7);
+            padding: 5px 15px;
+            border-radius: 10px;
+            font-size: 0.8rem;
             opacity: 0;
             transition: var(--transition);
             white-space: nowrap;
         }
 
-        .logo-main:hover .hover-tag-main { opacity: 1; bottom: -15px; }
+        .main-avatar-box:hover .main-tag { opacity: 1; bottom: -10px; }
 
         #main-title { 
-            font-size: clamp(2.5rem, 8vw, 5.5rem); 
+            font-size: clamp(3rem, 10vw, 6rem); 
             font-weight: 900; 
             text-transform: uppercase;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            letter-spacing: 5px;
+            text-shadow: 0 10px 40px rgba(0,0,0,0.8);
         }
 
         #cta-btn {
+            margin-top: 40px;
             display: inline-block;
-            padding: 18px 65px;
+            padding: 20px 70px;
             color: var(--white);
             text-decoration: none;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 12px;
-            font-weight: 700;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            font-weight: 800;
             transition: var(--transition);
             backdrop-filter: blur(10px);
-            margin-top: 40px;
         }
 
-        #cta-btn:hover { background: var(--main-color); color: #000; transform: translateY(-5px); }
+        #cta-btn:hover { background: var(--main-pink); color: #000; transform: translateY(-5px); }
 
-        /* PHẦN CONTRIBUTORS */
         .contributors-section {
             position: relative;
             z-index: 100;
-            background: var(--blue-theme); 
+            background: var(--dark-blue);
             padding: 120px 20px;
             text-align: center;
         }
@@ -129,57 +132,45 @@
         .contrib-grid {
             display: flex;
             justify-content: center;
-            gap: 45px;
+            gap: 50px;
             flex-wrap: wrap;
-            margin-top: 50px;
+            margin-top: 60px;
         }
 
-        /* CSS ĐẶC BIỆT CHO CON MÈO @THESMARTCAT2303 */
-        .smart-cat-box {
+        .img-wrapper {
             position: relative;
-            display: inline-block;
+            margin-bottom: 15px;
         }
 
-        .smart-cat-box img {
-            width: 110px;
-            height: 110px;
+        .img-wrapper img {
+            width: 120px;
+            height: 120px;
             border-radius: 20px;
             border: 2px solid rgba(255,255,255,0.1);
             transition: var(--transition);
         }
 
-        .smart-cat-box:hover img {
+        .img-wrapper:hover img {
             transform: translateY(-10px);
-            border-color: #3498db;
+            border-color: var(--white);
         }
 
-        .cat-tag {
+        .hover-name {
             position: absolute;
-            top: -30px;
+            top: -35px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(52, 152, 219, 0.9);
-            color: white;
-            padding: 4px 10px;
-            border-radius: 6px;
+            padding: 5px 12px;
+            border-radius: 8px;
             font-size: 0.75rem;
             opacity: 0;
             transition: 0.3s;
             white-space: nowrap;
-            pointer-events: none;
         }
 
-        .smart-cat-box:hover .cat-tag {
-            opacity: 1;
-            top: -40px;
-        }
+        .img-wrapper:hover .hover-name { opacity: 1; top: -45px; }
 
-        .contrib-card p {
-            margin-top: 15px;
-            font-weight: bold;
-        }
-
-        .cursor-follower {
+        .cursor {
             position: fixed;
             width: 12px; height: 12px;
             background: white;
@@ -193,49 +184,63 @@
 </head>
 <body>
 
-    <div class="cursor-follower" id="follower"></div>
+    <div class="cursor" id="cursor"></div>
     <div class="background-viewport" id="bg"></div>
     <div class="snow-container" id="snow-field"></div>
 
-    <main class="content-wrapper">
-        <div class="logo-main">
-            <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/2059e956374eb0ce2173f49214eb53bc.png" alt="Logo">
-            <span class="hover-tag-main">@miorisnakashi</span>
+    <main class="hero-section">
+        <div class="main-avatar-box">
+            <img src="img/2059e956374eb0ce2173f49214eb53bc.png" alt="MiorisNakashi">
+            <span class="main-tag">@miorisnakashi</span>
         </div>
         <h1 id="main-title">Archive Client</h1>
+        <p style="opacity: 0.7; letter-spacing: 2px;">Archive Client Minecraft Hacking</p>
         <a href="download.html" id="cta-btn">GET STARTED</a>
     </main>
 
     <section class="contributors-section">
-        <h2 style="font-size: 2.2rem;">❤️ CONTRIBUTORS</h2>
+        <h2 style="font-size: 2.5rem;">❤️ CONTRIBUTORS</h2>
         <div class="contrib-grid">
             
             <div class="contrib-card">
-                <div class="smart-cat-box">
-                    <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/5592f317c7eb53c8b45066aacf5f88fc.png">
-                    <span class="cat-tag">@thesmartcat2303</span>
+                <div class="img-wrapper">
+                    <img src="img/5592f317c7eb53c8b45066aacf5f88fc.png">
+                    <span class="hover-name" style="background: var(--tag-blue);">@thesmartcat2303</span>
                 </div>
-                <p>THE SMART CAT</p>
+                <p style="font-weight: 800;">KAWAII LOLI</p>
             </div>
 
             <div class="contrib-card">
-                <img src="https://via.placeholder.com/110/333/fff?text=LUVSY">
-                <p>LUVSY</p>
+                <div class="img-wrapper">
+                    <img src="img/ae56fd8615daaae078ad3f86608aa5a3.png">
+                    <span class="hover-name" style="background: var(--tag-red);">@xaibone</span>
+                </div>
+                <p style="font-weight: 800;">LUVSY</p>
             </div>
+
             <div class="contrib-card">
-                <img src="https://via.placeholder.com/110/222/fff?text=STING">
-                <p>STING</p>
+                <div class="img-wrapper">
+                    <img src="img/2bc628b7dca7ab619c2b210b7dee692a.png">
+                    <span class="hover-name" style="background: var(--tag-purple);">@zero__mc</span>
+                </div>
+                <p style="font-weight: 800;">STING</p>
             </div>
+
             <div class="contrib-card">
-                <img src="https://via.placeholder.com/110/111/fff?text=CYDE">
-                <p>CYDE</p>
+                <div class="img-wrapper">
+                    <img src="img/84dadce511ea23b434e11af3e9c362da.png">
+                    <span class="hover-name" style="background: var(--tag-orange);">@toidicakhia</span>
+                </div>
+                <p style="font-weight: 800;">CYDE</p>
             </div>
+
         </div>
+        <p style="margin-top: 100px; opacity: 0.3; font-size: 0.8rem;">Copyright © 2026 ArchiveUI</p>
     </section>
 
     <script>
         const field = document.getElementById('snow-field');
-        for (let i = 0; i < 60; i++) {
+        for (let i = 0; i < 70; i++) {
             const snow = document.createElement('div');
             snow.className = 'snowflake';
             const size = Math.random() * 3 + 2;
@@ -247,9 +252,9 @@
             field.appendChild(snow);
         }
 
-        const flw = document.getElementById('follower');
+        const crsr = document.getElementById('cursor');
         document.addEventListener('mousemove', (e) => {
-            flw.style.transform = `translate(${e.clientX - 6}px, ${e.clientY - 6}px)`;
+            crsr.style.transform = `translate(${e.clientX - 6}px, ${e.clientY - 6}px)`;
         });
 
         window.addEventListener('scroll', () => {
