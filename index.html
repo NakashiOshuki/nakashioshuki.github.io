@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Archive | Home</title>
+    <title>Archive | Premium Edition</title>
     <style>
         :root {
             --white: #ffffff;
@@ -24,7 +24,8 @@
         .background-viewport {
             position: fixed;
             inset: 0;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('Nekoha-Shizuku.png') no-repeat center center;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('https://w0.peakpx.com/wallpaper/107/439/wallpaper-anime-neko-girl-cute-catears-lying-bed.jpg') no-repeat center center;
             background-size: cover;
             z-index: 1;
         }
@@ -158,28 +159,16 @@
 
     <main class="content-wrapper">
         <div class="text-content-only">
-            <h1 id="main-title"></h1>
-            <p id="sub-title"></p>
-            <a href="download.html" id="cta-btn"></a>
+            <h1 id="main-title">Archive Client</h1>
+            <p id="sub-title">Archive Client Minecraft Hacking</p>
+            <a href="download.html" id="cta-btn">GET STARTED</a>
         </div>
     </main>
 
     <div class="footer-spacer"></div>
-    <footer class="footer-copyright" id="footer-text"></footer>
+    <footer class="footer-copyright">Copyright © 2026 ArchiveUI</footer>
 
     <script>
-        const DATA = {
-            t: "Archive Client",
-            s: "Archive Client Minecraft Hacking",
-            b: "GET STARTED",
-            f: "Copyright © 2026 ArchiveUI"
-        };
-
-        document.getElementById('main-title').textContent = DATA.t;
-        document.getElementById('sub-title').textContent = DATA.s;
-        document.getElementById('cta-btn').textContent = DATA.b;
-        document.getElementById('footer-text').textContent = DATA.f;
-
         const field = document.getElementById('snow-field');
         for (let i = 0; i < 100; i++) {
             const snow = document.createElement('div');
@@ -189,7 +178,7 @@
             snow.style.height = size + 'px';
             snow.style.left = Math.random() * 100 + '%';
             snow.style.opacity = Math.random() * 0.7 + 0.3;
-            snow.style.animationDuration = (Math.random() * 4 + 4) + 's', (Math.random() * 3 + 2) + 's';
+            snow.style.animationDuration = (Math.random() * 4 + 4) + 's, ' + (Math.random() * 3 + 2) + 's';
             snow.style.animationDelay = Math.random() * 5 + 's';
             field.appendChild(snow);
         }
