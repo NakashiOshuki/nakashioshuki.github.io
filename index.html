@@ -24,21 +24,11 @@
 
 body, html {
     font-family: 'Segoe UI', sans-serif;
-    background: #000;
+    background: #0a0a0a;
     color: var(--white);
     overflow-x: hidden;
     scroll-behavior: smooth;
     cursor: none;
-}
-
-/* ===== VIDEO BACKGROUND ===== */
-#bgVideo {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1; /* quan trọng để không che text */
 }
 
 /* CUSTOM CURSOR */
@@ -51,6 +41,19 @@ body, html {
     pointer-events: none;
     z-index: 9999;
     mix-blend-mode: difference;
+    transition: transform 0.06s ease-out;
+}
+
+/* BACKGROUND */
+.background-viewport {
+    position: fixed;
+    inset: 0;
+    background:
+        linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
+        url('https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/Nekoha-Shizuku.png')
+        no-repeat center center;
+    background-size: cover;
+    z-index: 1;
 }
 
 /* SNOW */
@@ -77,7 +80,7 @@ body, html {
 /* HERO */
 .hero-section {
     position: relative;
-    z-index: 10;
+    z-index: 100;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -86,11 +89,58 @@ body, html {
     text-align: center;
 }
 
+.main-avatar-box {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.main-avatar-box img {
+    width: 150px;
+    border-radius: 30px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    transition: var(--transition);
+}
+
+.main-avatar-box:hover img {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 0 30px var(--main-pink);
+}
+
+.main-tag {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.8);
+    padding: 6px 15px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    opacity: 0;
+    transition: var(--transition);
+    white-space: nowrap;
+    color: var(--main-pink);
+}
+
+.main-avatar-box:hover .main-tag {
+    opacity: 1;
+    bottom: -15px;
+}
+
 #main-title {
     font-size: clamp(3rem, 10vw, 6rem);
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 12px;
+    transition: 0.3s;
+}
+
+#main-title:hover {
+    transform: scale(1.05);
+    color: var(--main-pink);
+    text-shadow:
+        3px 3px 0px #ff00ea,
+        -3px -3px 0px #00eaff,
+        0 0 30px var(--main-pink);
 }
 
 #cta-btn {
@@ -102,42 +152,155 @@ body, html {
     border: 1px solid rgba(255,255,255,0.2);
     backdrop-filter: blur(10px);
     letter-spacing: 2px;
+    transition: var(--transition);
     text-decoration: none;
     color: white;
+}
+
+#cta-btn:hover {
+    background: white;
+    color: black;
+    transform: scale(1.1);
+    box-shadow: 0 0 30px white;
 }
 
 /* TEAM */
 .contributors-section {
     position: relative;
-    z-index: 10;
+    z-index: 100;
     background: radial-gradient(circle at center, #001d3d 0%, #000814 100%);
     padding: 120px 20px;
     text-align: center;
+    overflow: hidden;
+}
+
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.8;
+    animation: twinkle var(--duration) infinite ease-in-out;
+}
+
+@keyframes twinkle {
+    0%,100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.5); }
+}
+
+.contrib-grid {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+    margin-top: 60px;
+}
+
+.contrib-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.img-wrapper {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.img-wrapper img {
+    width: 120px;
+    height: 120px;
+    border-radius: 20px;
+    border: 2px solid rgba(255,255,255,0.1);
+    transition: var(--transition);
+}
+
+.img-wrapper:hover img {
+    transform: translateY(-15px) scale(1.05);
+}
+
+/* Đồng bộ màu */
+.contrib-card:nth-child(1) .img-wrapper:hover img { box-shadow: 0 0 30px var(--tag-yellow); }
+.contrib-card:nth-child(2) .img-wrapper:hover img { box-shadow: 0 0 30px var(--tag-blue); }
+.contrib-card:nth-child(3) .img-wrapper:hover img { box-shadow: 0 0 30px var(--tag-purple); }
+.contrib-card:nth-child(4) .img-wrapper:hover img { box-shadow: 0 0 30px var(--tag-orange); }
+
+.hover-name {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    opacity: 0;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+.img-wrapper:hover .hover-name {
+    opacity: 1;
+    top: -50px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- VIDEO BACKGROUND -->
-<video id="bgVideo" autoplay muted loop playsinline>
-    <source src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/background/1.mp4" type="video/mp4">
-</video>
-
 <div class="cursor" id="cursor"></div>
+<div class="background-viewport"></div>
 <div class="snow-container" id="snow-field"></div>
 
 <main class="hero-section">
+    <div class="main-avatar-box">
+        <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/2059e956374eb0ce2173f49214eb53bc.png">
+        <span class="main-tag">@miorisnakashi</span>
+    </div>
+
     <h1 id="main-title">Archive Client</h1>
+    <p style="opacity:0.6;letter-spacing:4px;font-weight:300;">NEXT GENERATION EXPLOIT</p>
     <a href="download.html" id="cta-btn">DOWNLOAD NOW</a>
 </main>
 
-<section class="contributors-section">
+<section class="contributors-section" id="team-area">
     <h2 style="font-size:2.5rem;letter-spacing:5px;">TEAM MEMBERS</h2>
+
+    <div class="contrib-grid">
+        <div class="contrib-card">
+            <div class="img-wrapper">
+                <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/5592f317c7eb53c8b45066aacf5f88fc.png">
+                <span class="hover-name" style="background: var(--tag-yellow);">@thesmartcat2303</span>
+            </div>
+            <p>THE SMART CAT</p>
+        </div>
+
+        <div class="contrib-card">
+            <div class="img-wrapper">
+                <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/70578351.jpg">
+                <span class="hover-name" style="background: var(--tag-blue);">@_realserenity</span>
+            </div>
+            <p>FMCPE</p>
+        </div>
+
+        <div class="contrib-card">
+            <div class="img-wrapper">
+                <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/28ca46ac57c5487abc677ebb9b8928fa.png">
+                <span class="hover-name" style="background: var(--tag-purple);">@zero__mc</span>
+            </div>
+            <p>4هززي</p>
+        </div>
+
+        <div class="contrib-card">
+            <div class="img-wrapper">
+                <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/img/84dadce511ea23b434e11af3e9c362da.png">
+                <span class="hover-name" style="background: var(--tag-orange);">@toidicakhia</span>
+            </div>
+            <p>TOIDICAKHIA</p>
+        </div>
+    </div>
 </section>
 
 <script>
-/* Snow */
 const field = document.getElementById('snow-field');
 for (let i = 0; i < 60; i++) {
     const snow = document.createElement('div');
@@ -150,7 +313,19 @@ for (let i = 0; i < 60; i++) {
     field.appendChild(snow);
 }
 
-/* Cursor */
+const teamArea = document.getElementById('team-area');
+for (let i = 0; i < 60; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    const size = Math.random() * 2 + 1;
+    star.style.width = size + 'px';
+    star.style.height = size + 'px';
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 100 + '%';
+    star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
+    teamArea.appendChild(star);
+}
+
 const crsr = document.getElementById('cursor');
 document.addEventListener('mousemove', e => {
     crsr.style.transform = `translate(${e.clientX - 6}px, ${e.clientY - 6}px)`;
