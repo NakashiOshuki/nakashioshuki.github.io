@@ -8,17 +8,18 @@
         :root {
             --white: #ffffff;
             --main-color: #ffb7c5; 
+            --blue-theme: #3498db;
             --transition: all 0.4s ease;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
 
         body, html {
-            height: 100vh;
             font-family: 'Segoe UI', sans-serif;
             background: #0a0a0a;
             color: var(--white);
-            overflow: hidden;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
         .background-viewport {
@@ -28,6 +29,7 @@
                         url('https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/Nekoha-Shizuku.png') no-repeat center center;
             background-size: cover;
             z-index: 1;
+            transition: opacity 0.6s ease;
         }
 
         .snow-container {
@@ -60,6 +62,40 @@
             text-align: center;
         }
 
+        .logo-container {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .logo-container img {
+            width: 140px;
+            border-radius: 30px;
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .logo-container:hover img {
+            transform: scale(1.1);
+        }
+
+        .hover-tag {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            color: var(--main-color);
+            opacity: 0;
+            transition: var(--transition);
+            white-space: nowrap;
+            letter-spacing: 1px;
+        }
+
+        .logo-container:hover .hover-tag {
+            opacity: 1;
+            bottom: -10px;
+        }
+
         #main-title { 
             font-size: clamp(2.5rem, 8vw, 5.5rem); 
             font-weight: 900; 
@@ -69,26 +105,6 @@
             transition: var(--transition);
         }
 
-        #main-title:hover {
-            transform: scale(1.05);
-            color: var(--main-color);
-            text-shadow: 0 0 20px var(--main-color);
-            letter-spacing: 5px;
-        }
-
-        #sub-title { 
-            font-size: 1.2rem; 
-            opacity: 0.9;
-            margin-bottom: 45px;
-            letter-spacing: 2px;
-            transition: var(--transition);
-        }
-
-        #sub-title:hover {
-            color: var(--main-color);
-            letter-spacing: 4px;
-        }
-        
         #cta-btn {
             display: inline-block;
             padding: 18px 65px;
@@ -107,17 +123,60 @@
             background: var(--main-color);
             color: #000;
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(255, 183, 197, 0.4);
         }
 
-        .footer-copyright {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
+        .contributors-section {
+            position: relative;
             z-index: 100;
-            font-size: 0.85rem;
-            opacity: 0.5;
+            min-height: 100vh;
+            background: #001f3f; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 50px;
+        }
+
+        .pixel-header {
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .contrib-grid {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .contrib-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contrib-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 20px;
+            border: 3px solid rgba(255,255,255,0.1);
+            transition: var(--transition);
+        }
+
+        .contrib-card:hover img {
+            transform: translateY(-15px);
+            border-color: var(--blue-theme);
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.4);
+        }
+
+        .contrib-card p {
+            font-weight: 800;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
         }
 
         .cursor-follower {
@@ -130,28 +189,46 @@
             transition: transform 0.08s ease-out;
             mix-blend-mode: difference;
         }
-
-        @media (max-width: 768px) {
-            .cursor-follower { display: none; }
-            * { cursor: auto; }
-        }
     </style>
 </head>
 <body>
 
     <div class="cursor-follower" id="follower"></div>
-    <div class="background-viewport"></div>
+    <div class="background-viewport" id="bg-view"></div>
     <div class="snow-container" id="snow-field"></div>
 
     <main class="content-wrapper">
+        <div class="logo-container">
+            <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/5592f317c7eb53c8b45066aacf5f88fc.png" alt="Logo">
+            <span class="hover-tag">@thesmartcat2303</span>
+        </div>
         <h1 id="main-title">Archive Client</h1>
-        <p id="sub-title">Archive Client Minecraft Hacking</p>
+        <p id="sub-title" style="margin-bottom: 40px; opacity: 0.8;">Archive Client Minecraft Hacking</p>
         <a href="download.html" id="cta-btn">GET STARTED</a>
-
-        <footer class="footer-copyright">
-            Copyright © 2026 ArchiveUI
-        </footer>
     </main>
+
+    <section class="contributors-section">
+        <h2 class="pixel-header">❤️ CONTRIBUTORS</h2>
+        <div class="contrib-grid">
+            <div class="contrib-card">
+                <img src="https://raw.githubusercontent.com/NakashiOshuki/nakashioshuki.github.io/main/5592f317c7eb53c8b45066aacf5f88fc.png" alt="K">
+                <p>KAWAII LOLI</p>
+            </div>
+            <div class="contrib-card">
+                <img src="https://via.placeholder.com/120/555/fff?text=LUVSY" alt="L">
+                <p>LUVSY</p>
+            </div>
+            <div class="contrib-card">
+                <img src="https://via.placeholder.com/120/111/fff?text=STING" alt="S">
+                <p>STING</p>
+            </div>
+            <div class="contrib-card">
+                <img src="https://via.placeholder.com/120/333/fff?text=CYDE" alt="C">
+                <p>CYDE</p>
+            </div>
+        </div>
+        <p style="margin-top: 80px; opacity: 0.3; font-size: 0.8rem;">Copyright © 2026 ArchiveUI</p>
+    </section>
 
     <script>
         const field = document.getElementById('snow-field');
@@ -171,6 +248,3 @@
         document.addEventListener('mousemove', (e) => {
             flw.style.transform = `translate(${e.clientX - 6}px, ${e.clientY - 6}px)`;
         });
-    </script>
-</body>
-</html>
